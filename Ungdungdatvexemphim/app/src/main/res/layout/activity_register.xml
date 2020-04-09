@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/gradient_backgroud"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="20dp">
+<!--    Email-->
+
+   <com.google.android.material.textfield.TextInputLayout
+       android:layout_width="match_parent"
+       android:id="@+id/textInput_UserName"
+       android:layout_height="wrap_content"
+       app:counterEnabled="true"
+       app:errorEnabled="true"
+       app:counterMaxLength="10">
+       <com.google.android.material.textfield.TextInputEditText
+           android:layout_width="match_parent"
+           android:layout_height="wrap_content"
+           android:hint="Username:"
+           android:textSize="20sp"
+           android:textStyle="bold"
+           android:textColor="@color/black"
+           android:inputType="textEmailAddress"/>
+   </com.google.android.material.textfield.TextInputLayout>
+<!--    Username-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/textInput_Password"
+        android:layout_height="wrap_content"
+        app:errorEnabled="true"
+        app:passwordToggleEnabled="true"
+        >
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password:"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:inputType="textPassword"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+<!--    Email-->
+    <com.google.android.material.textfield.TextInputLayout
+        android:layout_width="match_parent"
+        android:id="@+id/textInput_Email"
+        android:layout_height="wrap_content"
+        app:errorEnabled="true">
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Email"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:inputType="textEmailAddress"/>
+    </com.google.android.material.textfield.TextInputLayout>
+
+    <Button
+        android:id="@+id/buttonRegister"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Register" />
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Or"
+        android:textAlignment="center"
+        android:gravity="center_horizontal" />
+
+
+</LinearLayout>
+
+
+
+
+
+
+    <!--                    <TextView-->
+    <!--                        android:layout_width="wrap_content"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:layout_margin="10dp"-->
+    <!--                        android:text="Email"-->
+    <!--                        android:textColor="@color/black"-->
+    <!--                        android:textSize="14sp"-->
+    <!--                        android:textStyle="bold" />-->
+
+    <!--                    <EditText-->
+    <!--                        android:layout_width="match_parent"-->
+    <!--                        android:layout_height="wrap_content"-->
+    <!--                        android:layout_marginLeft="10dp"-->
+    <!--                        android:layout_marginRight="10dp"-->
+    <!--                        android:inputType="textEmailAddress" />-->
+
+    <!--                <Button-->
+    <!--                    android:layout_width="match_parent"-->
+    <!--                    android:layout_height="wrap_content"-->
+    <!--                    android:text="Đăng Kí"-->
+    <!--                    android:background="@drawable/et_bg"-->
+    <!--                    android:textAllCaps="false" />-->

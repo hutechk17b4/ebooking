@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+<!--    Màu cho giao diện chính!-->
+    <color name="colorPrimary">#000000</color>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorAccent">#FFAC4B</color>
+    <color name="yellow">#FFAC4B</color>
+    <color name="white">#ffffff</color>
+    <color name="black">#000000</color>
+    <color name="d_gray">#191919</color>
+    <color name="l_gray">#4c4c4c</color>
+<!--    Màu cho login đăng nhập và Bottom navigation -->
+
+    <color name="transparent">#00000000</color>
+    <color name="gradBlueStart">#19AA8B</color>
+    <color name="gradBlueStop">#23A7D8</color>
+    <color name="transparentBlack">#D0000000</color>
+    <color name="gradOrangeStart">#ffe259</color>
+    <color name="gradOrangeStop">#ffa751</color>
+    <color name="FloralWhite">#FFFAF0</color>
+
+
+
+
+<!--    Màu cho Navigation Drawer!-->
+    <color name="c3">#353e47</color>
+    <color name="MediumSpringGreen">#00FA9A</color>
+    <color name="SaddleBrown">#8B4513</color>
+
+</resources>

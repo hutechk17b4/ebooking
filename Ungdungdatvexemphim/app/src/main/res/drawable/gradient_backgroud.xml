@@ -1,0 +1,11 @@
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+<!--    Màn hình login!-->
+    <gradient
+        android:angle="0"
+        android:endColor="@color/gradOrangeStop"
+        android:startColor="@color/gradOrangeStart"
+        android:type="linear" />
+
+</shape>

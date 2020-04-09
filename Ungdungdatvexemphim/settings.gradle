@@ -1,0 +1,2 @@
+include ':app'
+rootProject.name='Ung dung dat ve xem phim'
