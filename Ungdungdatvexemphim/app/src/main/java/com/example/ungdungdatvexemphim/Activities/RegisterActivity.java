@@ -32,8 +32,8 @@ public class RegisterActivity extends AppCompatActivity {
     private TextInputLayout textInputPassWord;
     private TextInputLayout textInputEmail;
     private Button btnRegister;
-    String urlCheckUser="http://192.168.1.8/film_booking/checkUsername.php";
-    String urlInsert = "http://192.168.1.8/film_booking/insertUser.php";
+    String urlCheckUser="http://192.168.1.8/php_ebooking/checkUsername.php";
+    String urlInsert = "http://192.168.1.8/php_ebooking/insertUser.php";
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
                     "(?=.*[0-9])" +         //at least 1 digit

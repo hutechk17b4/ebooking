@@ -19,7 +19,11 @@ import com.example.ungdungdatvexemphim.R;
 import com.example.ungdungdatvexemphim.Fragments.DetailedFragment;
 import com.squareup.picasso.Picasso;
 
+import java.net.URISyntaxException;
 import java.util.List;
+
+import io.socket.client.IO;
+import io.socket.client.Socket;
 
 // Adapter sẽ làm gần như tất cả các công việc cho RecyclerView
 // nó kết nối Datasource với các View item.
@@ -33,6 +37,7 @@ import java.util.List;
 // Bạn tùy chỉnh quy trình này bằng cách ghi đè lên BindViewHolder().
 public class NowPlayingMovieAdapter extends RecyclerView.Adapter<NowPlayingMovieAdapter.ViewHolder> {
 
+    private Socket mSocket;
     Context context;
     List<NowPlaying> nowPlayings;
 
@@ -63,6 +68,25 @@ public class NowPlayingMovieAdapter extends RecyclerView.Adapter<NowPlayingMovie
 
 // Nếu bạn khai báo một biến là final, bạn không thể thay đổi giá trị của biến final (Nó sẽ là Hằng Số).
         final String rating = playing.getVote_average()+"/10";
+
+
+        //=============================Xử Lý Đồng Bộ NodeJS ===================================
+        try {
+            mSocket= IO.socket("http://192.168.1.8:3000/");
+        } catch (URISyntaxException e) {
+            e.printStackTrace();
+        }
+        mSocket.connect();
+
+        mSocket.emit("client-send-data",playing.getId());
+        mSocket.emit("client-send-data-title",playing.getTitle());
+        String a[]=playing.getGenre_ids();
+        for(int i=0;i<a.length;i++)
+        {
+            mSocket.emit("client-send-genreid",a[i]);
+        }
+
+        //========================Xử Lý Đồng Bộ NodeJS =======================================
 
         holder.tvRating.setText(rating);
         holder.tvTitle.setText(playing.getTitle());
