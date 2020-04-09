@@ -32,7 +32,8 @@ public class RegisterActivity extends AppCompatActivity {
     private TextInputLayout textInputPassWord;
     private TextInputLayout textInputEmail;
     private Button btnRegister;
-    String urlInsert = "http://192.168.1.5:2207/moviebooking/insertCustomer.php";
+    String urlCheckUser="http://192.168.1.8/film_booking/checkUsername.php";
+    String urlInsert = "http://192.168.1.8/film_booking/insertUser.php";
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
                     "(?=.*[0-9])" +         //at least 1 digit
@@ -53,23 +54,23 @@ public class RegisterActivity extends AppCompatActivity {
         btnRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                String userName = textInputUserName.getEditText().getText().toString().trim();
-//                String passWord = textInputPassWord.getEditText().getText().toString().trim();
-//                String email = textInputEmail.getEditText().getText().toString().trim();
+                String userName = textInputUserName.getEditText().getText().toString().trim();
+                String passWord = textInputPassWord.getEditText().getText().toString().trim();
+                String email = textInputEmail.getEditText().getText().toString().trim();
                 if(!validateUserName() | !validatePassWord() | !validateEmail()){
                     Toast.makeText(RegisterActivity.this, "Vui lòng nhập đủ thông tin", Toast.LENGTH_SHORT).show();
                 }
                 else{
-                    AddCustomer(urlInsert);
+                    AddCustomer(userName,passWord,email);
                 }
             }
         });
 
     }
     // Xử lý
-    private void AddCustomer(String url){
+    private void AddCustomer(final String userName, final String Pass, final String Email){
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, urlInsert,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -91,15 +92,54 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> params = new HashMap<>();
-                params.put("username",textInputUserName.getEditText().getText().toString().trim());
-                params.put("password",textInputPassWord.getEditText().getText().toString().trim());
-                params.put("email",textInputEmail.getEditText().getText().toString().trim());
+                params.put("TenDangNhapKH",userName);//textInputUserName.getEditText().getText().toString().trim()
+                params.put("MatKhauKH",Pass);//textInputPassWord.getEditText().getText().toString().trim()
+                params.put("EmailKH",Email);//textInputEmail.getEditText().getText().toString().trim()
 
                 return params;
             }
         };
         requestQueue.add(stringRequest);
     }
+    //===================NGUYÊN ĐẸP TRAI==========Xử Lý Kiểm Tra Email Và Tên Đăng Nhập có bị trùng trong cơ sở dữ liệu không======================================================================
+    private void RegistUser(final String userName, final String Pass, final String Email)
+    {
+        RequestQueue requestQueue= Volley.newRequestQueue(this);
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlCheckUser,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (response.contains("1"))
+                        {
+                            Toast.makeText(RegisterActivity.this,"email hoặc tên đn bị trùng",Toast.LENGTH_SHORT).show();
+                        }
+                        else {
+                            AddCustomer(userName,Pass,Email);
+
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(RegisterActivity.this,error.toString(),Toast.LENGTH_SHORT).show();
+                    }
+                }
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params=new HashMap<>();
+                params.put("TenDangNhapKH",userName);//textInputUserName.getEditText().getText().toString().trim()
+                params.put("MatKhauKH",Pass);//textInputPassWord.getEditText().getText().toString().trim()
+                params.put("EmailKH",Email);//textInputEmail.getEditText().getText().toString().trim()
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+
+    //===================================NGUYÊN================================================================
     // Ánh xạ
     private void addControls() {
         textInputEmail = findViewById(R.id.textInput_Email);

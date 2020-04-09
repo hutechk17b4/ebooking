@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin,btnSignUp, btnForgotPass;
     private TextInputLayout textInputUserName;
     private TextInputLayout textInputPassWord;
-    String urlLogin = "http://192.168.1.5:2207/moviebooking/login.php";
+    String urlLogin = "http://192.168.1.8/film_booking/dangnhap.php";
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
                     "(?=.*[0-9])" +         //at least 1 digit
@@ -121,8 +121,8 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params = new HashMap<>();
-                params.put("username", textInputUserName.getEditText().getText().toString().trim());
-                params.put("password", textInputPassWord.getEditText().getText().toString().trim());
+                params.put("TenDangNhap", textInputUserName.getEditText().getText().toString().trim());
+                params.put("MatKhau", textInputPassWord.getEditText().getText().toString().trim());
                 return params;
             }
         };
