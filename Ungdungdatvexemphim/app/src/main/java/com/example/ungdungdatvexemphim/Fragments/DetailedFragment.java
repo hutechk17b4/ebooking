@@ -77,7 +77,7 @@ public class DetailedFragment extends Fragment {
 //                fr.replace(R.id.fragmentContainer, new BuyticketFragment());
 //                fr.commit();
             }
-        });
+        });// code t đổi nè thấy chưa , lần sau có người update là gõ lệnh git pull thôi
 //        btnTicketBooking.getText(tvTitle.)
         return view;
     }
