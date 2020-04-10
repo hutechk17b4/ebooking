@@ -78,6 +78,7 @@ public class LoginActivity extends AppCompatActivity {
 //                String passWord = textInputPassWord.getEditText().getText().toString().trim();
                 if( !validateUserName() |  !validatePassWord()){
                     Toast.makeText(LoginActivity.this, "Hãy nhập đầy đủ thông tin!, test push lên lại chơi", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "thử thay đổi code tí, tạo ra dòng thông báo này rồi , giờ push lại project lên thôi", Toast.LENGTH_SHORT).show();
                     
                 }
                  else{
