@@ -105,6 +105,7 @@ public class NowPlayingMovieAdapter extends RecyclerView.Adapter<NowPlayingMovie
                 bundle.putString("movieReleaseDate",playing.getRelease_date());
                 bundle.putString("movieDesc",playing.getOverview());
                 bundle.putString("moviePosterPath",imgUrl);
+                bundle.putString("IDmovie",playing.getId());
 // Đóng gói bundle vào detailedFragment
                 detailedFragment.setArguments(bundle);
                 ((MainActivity)context).getSupportFragmentManager()

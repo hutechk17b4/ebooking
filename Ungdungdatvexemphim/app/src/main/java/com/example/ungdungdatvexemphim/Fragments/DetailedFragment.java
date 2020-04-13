@@ -8,14 +8,25 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
-import com.example.ungdungdatvexemphim.Activities.TestActivity;
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+import com.example.ungdungdatvexemphim.Activities.SelectTimeStartActivity;
 import com.example.ungdungdatvexemphim.R;
 import com.squareup.picasso.Picasso;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class DetailedFragment extends Fragment {
 // Tạo đối tượng để ánh xạ
@@ -26,6 +37,8 @@ public class DetailedFragment extends Fragment {
     Button buttonbuyticket;
 
     String movieTitle, movieRating, movieReleaseDate, movieDesc, movieImagePath;
+
+    String urlCheckLichTrinh="http://192.168.1.8/php_ebooking/checkLichTrinh.php";
 
     // Tạo View từ bản vẽ fragment_detailed.xml
     @Nullable
@@ -42,13 +55,14 @@ public class DetailedFragment extends Fragment {
 
 // Bundle trong Android là một đối tượng dữ liệu được tạo ra nhằm mục dích đóng gói
 // các dữ liệu cần được truyền qua lại giữa các Intent trong Android
-        Bundle bundle = getArguments();
+        final Bundle bundle = getArguments();
 //  Lấy ra được gói tin trong Bundle
         movieTitle = bundle.getString("movieTitle");
         movieRating = bundle.getString("movieRating");
         movieDesc = bundle.getString("movieDesc");
         movieReleaseDate = bundle.getString("movieReleaseDate");
         movieImagePath = bundle.getString("moviePosterPath");
+        Toast.makeText(getContext(),bundle.getString("IDmovie"),Toast.LENGTH_SHORT).show();
 
 // đặt tên cho đối tượng đã tạo
         tvTitle.setText(movieTitle);
@@ -70,16 +84,50 @@ public class DetailedFragment extends Fragment {
         btnTicketBooking.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                TestActivity testActivity= new TestActivity();
-                Intent intent=new Intent(getContext(),testActivity.getClass());
-                startActivity(intent);
-//                FragmentTransaction fr = getFragmentManager().beginTransaction();
-//                fr.replace(R.id.fragmentContainer, new BuyticketFragment());
-//                fr.commit();
+//                ChooseSeatActivity chooseSeatActivity=new ChooseSeatActivity();
+//                Intent intent=new Intent(getContext(), chooseSeatActivity.getClass());
+//                startActivity(intent);
+                CheckLichTrinh(bundle.getString("IDmovie"));
+
             }
-        });// code t đổi nè thấy chưa , lần sau có người update là gõ lệnh git pull thôi
-//        btnTicketBooking.getText(tvTitle.)
+        });
         return view;
+    }
+
+    private void CheckLichTrinh(final String IDphim)
+    {
+        RequestQueue requestQueue= Volley.newRequestQueue(getContext());
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlCheckLichTrinh,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        if (response.equals("success"))
+                        {
+                            SelectTimeStartActivity selectTimeStartActivity=new SelectTimeStartActivity();
+                            Intent intent=new Intent(getContext(),selectTimeStartActivity.getClass());
+                            getContext().startActivity(intent);
+                        }
+                        else {
+                            Toast.makeText(getContext(),"không có lịch chiếu",Toast.LENGTH_SHORT).show();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params=new HashMap<>();
+                params.put("IDphim",IDphim);
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
+
     }
 
 

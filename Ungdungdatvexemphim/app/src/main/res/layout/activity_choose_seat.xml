@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.example.ungdungdatvexemphim.Activities.Choose_Seat_Activity"
+    android:id="@+id/LayoutChoseSeat">
+
+    <TextView
+        android:textSize="30sp"
+        android:text="Tên Phim"
+        android:id="@+id/txvThongTinPhim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </TextView>
+
+    <RelativeLayout
+        android:id="@+id/ScreenLayou"
+        android:background="#788DA0"
+        android:layout_below="@+id/txvThongTinPhim"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp">
+        <TextView
+            android:layout_centerHorizontal="true"
+            android:text="Screen"
+            android:textSize="40sp"
+            android:layout_marginTop="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        </TextView>
+
+    </RelativeLayout>
+
+    <GridView
+        android:id="@+id/grvSeat"
+        android:numColumns="3"
+        android:layout_marginTop="50dp"
+        android:layout_below="@id/ScreenLayou"
+        android:layout_width="match_parent"
+        android:layout_height="400dp" >
+
+    </GridView>
+
+    <Button
+        android:id="@+id/btnXacNhanBook"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/grvSeat"
+        android:text="Book">
+
+    </Button>
+
+
+
+
+
+
+</RelativeLayout>
