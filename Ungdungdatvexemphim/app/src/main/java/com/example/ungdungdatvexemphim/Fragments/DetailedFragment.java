@@ -36,9 +36,9 @@ public class DetailedFragment extends Fragment {
     ImageView movieImage;
     Button buttonbuyticket;
 
-    String movieTitle, movieRating, movieReleaseDate, movieDesc, movieImagePath;
+    String movieTitle, movieRating, movieReleaseDate, movieDesc, movieImagePath,IDmovie;
 
-    String urlCheckLichTrinh="http://192.168.1.8/php_ebooking/checkLichTrinh.php";
+    String urlCheckLichTrinh="http://192.168.1.9/php_ebooking/checkLichTrinh.php";
 
     // Tạo View từ bản vẽ fragment_detailed.xml
     @Nullable
@@ -62,7 +62,8 @@ public class DetailedFragment extends Fragment {
         movieDesc = bundle.getString("movieDesc");
         movieReleaseDate = bundle.getString("movieReleaseDate");
         movieImagePath = bundle.getString("moviePosterPath");
-        Toast.makeText(getContext(),bundle.getString("IDmovie"),Toast.LENGTH_SHORT).show();
+        IDmovie=bundle.getString("IDmovie");
+        Toast.makeText(getContext(),IDmovie,Toast.LENGTH_SHORT).show();
 
 // đặt tên cho đối tượng đã tạo
         tvTitle.setText(movieTitle);
@@ -87,29 +88,41 @@ public class DetailedFragment extends Fragment {
 //                ChooseSeatActivity chooseSeatActivity=new ChooseSeatActivity();
 //                Intent intent=new Intent(getContext(), chooseSeatActivity.getClass());
 //                startActivity(intent);
-                CheckLichTrinh(bundle.getString("IDmovie"));
+                CheckLichTrinh();
+                // truyền qua cả tên phim
+
 
             }
         });
         return view;
     }
 
-    private void CheckLichTrinh(final String IDphim)
+    public void CheckLichTrinh()
     {
         RequestQueue requestQueue= Volley.newRequestQueue(getContext());
         StringRequest stringRequest=new StringRequest(Request.Method.POST, urlCheckLichTrinh,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-                        if (response.equals("success"))
+                       // Toast.makeText(getContext(),response,Toast.LENGTH_LONG).show();
+                        if(response.equals("success"))
                         {
                             SelectTimeStartActivity selectTimeStartActivity=new SelectTimeStartActivity();
                             Intent intent=new Intent(getContext(),selectTimeStartActivity.getClass());
+                            Bundle bundle=new Bundle();
+                            bundle.putString("TENPHIM",movieTitle);
+                            bundle.putString("IDPHIM",IDmovie);
+                            intent.putExtra("DuLieuTenPhim",bundle);
                             getContext().startActivity(intent);
+
                         }
                         else {
-                            Toast.makeText(getContext(),"không có lịch chiếu",Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getContext(),"ko có lịch chiếu",Toast.LENGTH_SHORT).show();
                         }
+
+
+
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -122,7 +135,9 @@ public class DetailedFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params=new HashMap<>();
-                params.put("IDphim",IDphim);
+                params.put("IDphimPost",IDmovie);
+
+
                 return params;
             }
         };

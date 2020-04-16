@@ -2,6 +2,7 @@ package com.example.ungdungdatvexemphim.Adapters;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -63,18 +64,24 @@ public class LichTrinhAdapter extends BaseAdapter {
             holder= (ViewHolder) view.getTag();
         }
 
-        LichTrinh lichTrinh=arrLichtrinh.get(i);
+        final LichTrinh lichTrinh=arrLichtrinh.get(i);
         holder.txvstart.setText(lichTrinh.getStartTime());
         holder.txvend.setText(lichTrinh.getEndTime());
+
 
         holder.btnselecttime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ChooseSeatActivity chooseseatactivity= new ChooseSeatActivity();
                 Intent intent=new Intent(view.getContext(),chooseseatactivity.getClass());
+                Bundle bundle=new Bundle();
+                bundle.putString("IDphim",lichTrinh.getIDphim());
+                bundle.putString("IDrap",lichTrinh.getIDrap());
+                intent.putExtra("DulieuPhimRap",bundle);
                 view.getContext().startActivity(intent);
             }
         });
+
 
         return view;
     }

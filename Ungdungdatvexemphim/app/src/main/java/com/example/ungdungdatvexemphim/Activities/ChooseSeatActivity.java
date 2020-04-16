@@ -5,14 +5,16 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ungdungdatvexemphim.Adapters.SeatAdapter;
 import com.example.ungdungdatvexemphim.Models.Seat;
@@ -23,6 +25,8 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class ChooseSeatActivity extends AppCompatActivity {
 
@@ -30,12 +34,18 @@ public class ChooseSeatActivity extends AppCompatActivity {
     GridView gvSeat;
 
     Button btnXacNhanChoose;
+    TextView txvTenPhim,txvTenRap;
+    String IDphim="";
+    String IDrap="";
 
 
     ArrayList<Seat> arrSeat;
     SeatAdapter adapter;
-    String urlGetSeat = "http://192.168.1.8/php_ebooking/getSeat.php";
-    String urlGetSeatB="http://192.168.1.8/php_ebooking/getSeatB.php";
+    String urlGetTenPhim="http://192.168.1.9/php_ebooking/getTenPhim.php";
+
+    String urlGetSeatR="http://192.168.1.9/php_ebooking/getSeatRap.php";
+    String urlGetSeatR2="http://192.168.1.9/php_ebooking/getSeatRap2.php";
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,9 +54,28 @@ public class ChooseSeatActivity extends AppCompatActivity {
         AnhXa();
         adapter = new SeatAdapter(this, R.layout.dong_seat, arrSeat);
         gvSeat.setAdapter(adapter);
-        getDataA();
-        getDataB();
-        xulySuKienData();
+
+
+
+
+
+        //================= lấy dữ liệu phim rạp truyền qua từ select time activity
+        Intent intent=getIntent();
+        Bundle bundle=intent.getBundleExtra("DulieuPhimRap");
+        txvTenRap.setText("rạp: "+bundle.getString("IDrap"));
+
+        IDphim=bundle.getString("IDphim");
+        IDrap=bundle.getString("IDrap");
+        //=========================================================
+
+        getDataSeat(IDrap);// lấy dữ liệu ghế
+
+        getTenPhim(IDphim);// gán tên phim vào textview
+
+
+
+        xulySuKienData();// xử lý sự kiện truyền dữ liệu ghế đã book
+        //===================================================
 
     }
 
@@ -55,6 +84,9 @@ public class ChooseSeatActivity extends AppCompatActivity {
 
         btnXacNhanChoose = (Button) findViewById(R.id.btnXacNhanBook);
         gvSeat = (GridView) findViewById(R.id.grvSeat);
+        txvTenPhim=(TextView)findViewById(R.id.txvThongTinPhim);
+        txvTenRap=(TextView)findViewById(R.id.txvTenRap);
+
         arrSeat = new ArrayList<>();
 
 
@@ -66,31 +98,28 @@ public class ChooseSeatActivity extends AppCompatActivity {
 //        arrSeat.add(new Seat("6","x",R.drawable.seat_sale));
     }
 
-    private void getDataA() {// lấy dữ liệu ghế hàng A ra hihi
+    private void getDataSeat(final String ID) {// lấy dữ liệu ghế theo IDrap  ra hihi
+
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, urlGetSeat, null,
-                new Response.Listener<JSONArray>() {
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlGetSeatR,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(final JSONArray response) {
-                        //  Toast.makeText(Choose_Seat_Activity.this,response.toString(),Toast.LENGTH_LONG).show();
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-                                final JSONObject object = response.getJSONObject(i);
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray array=new JSONArray(response);
+                            for (int i=0;i<array.length();i++)
+                            {
+                                JSONObject object=array.getJSONObject(i);
                                 int ID = object.getInt("Id");
                                 int Soghe = object.getInt("SoGhe");
                                 String Hangghe = object.getString("HangGhe");
                                 arrSeat.add(new Seat(ID, Hangghe, Soghe, R.drawable.seat_sale));
 
-                            } catch (JSONException e) {
-                                e.printStackTrace();
                             }
-
-                            //==============================================================
-
-
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                        //============================================================
-                        adapter.notifyDataSetChanged();
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -99,8 +128,16 @@ public class ChooseSeatActivity extends AppCompatActivity {
 
                     }
                 }
-        );
-        requestQueue.add(jsonArrayRequest);
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params= new HashMap<>();
+                params.put("IDrapPost",ID);
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
+
 
     }
 
@@ -137,32 +174,30 @@ public class ChooseSeatActivity extends AppCompatActivity {
         });
 
     }
+    //============================================================================
 
-    private void getDataB() {// lấy dữ liệu ghế hàng B ra hihi
-        RequestQueue requestQueue = Volley.newRequestQueue(this);
-        JsonArrayRequest jsonArrayRequest = new JsonArrayRequest(Request.Method.GET, urlGetSeatB, null,
-                new Response.Listener<JSONArray>() {
+
+//==============================================================================================
+    private void getTenPhim(final String ID)// lấy tên Phim theo IDphim post lên
+    {
+        RequestQueue requestQueue=Volley.newRequestQueue(this);
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlGetTenPhim,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(final JSONArray response) {
-                        //  Toast.makeText(Choose_Seat_Activity.this,response.toString(),Toast.LENGTH_LONG).show();
-                        for (int i = 0; i < response.length(); i++) {
-                            try {
-                                final JSONObject object = response.getJSONObject(i);
-                                int ID = object.getInt("Id");
-                                int Soghe = object.getInt("SoGhe");
-                                String Hangghe = object.getString("HangGhe");
-                                arrSeat.add(new Seat(ID, Hangghe, Soghe, R.drawable.seat_sale));
-
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray array=new JSONArray(response);
+                            for (int i=0;i<array.length();i++)
+                            {
+                                JSONObject object=array.getJSONObject(i);
+                                String Tenphim=object.getString("tenphim");
+                                txvTenPhim.setText(Tenphim);
                             }
-
-                            //==============================================================
-
-
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
-                        //============================================================
-                        adapter.notifyDataSetChanged();
+
+
                     }
                 },
                 new Response.ErrorListener() {
@@ -171,9 +206,15 @@ public class ChooseSeatActivity extends AppCompatActivity {
 
                     }
                 }
-        );
-        requestQueue.add(jsonArrayRequest);
-
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params=new HashMap<>();
+                params.put("IDphimPost",ID);
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
     }
 
 }

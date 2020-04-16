@@ -4,13 +4,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.example.ungdungdatvexemphim.Activities.Choose_Seat_Activity"
+    tools:context="com.example.ungdungdatvexemphim.Activities.ChooseSeatActivity"
     android:id="@+id/LayoutChoseSeat">
 
     <TextView
-        android:textSize="30sp"
+        android:textSize="20sp"
         android:text="Tên Phim"
         android:id="@+id/txvThongTinPhim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </TextView>
+    <TextView
+        android:id="@+id/txvTenRap"
+        android:layout_marginLeft="20dp"
+        android:text="Rạp"
+        android:layout_toRightOf="@+id/txvThongTinPhim"
+        android:textSize="20sp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
