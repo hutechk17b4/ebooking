@@ -16,8 +16,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.ungdungdatvexemphim.Adapters.SeatAdapter;
 import com.example.ungdungdatvexemphim.Models.Seat;
+import com.example.ungdungdatvexemphim.Adapters.SeatAdapter;
 import com.example.ungdungdatvexemphim.R;
 
 import org.json.JSONArray;
@@ -41,9 +41,9 @@ public class ChooseSeatActivity extends AppCompatActivity {
 
     ArrayList<Seat> arrSeat;
     SeatAdapter adapter;
-    String urlGetTenPhim="http://192.168.1.9/php_ebooking/getTenPhim.php";
+    String urlGetTenPhim="http://192.168.1.7:2207/film_booking/getTenPhim.php";
 
-    String urlGetSeatR="http://192.168.1.9/php_ebooking/getSeatRap.php";
+    String urlGetSeatR="http://192.168.1.7:2207/film_booking/getSeatRap.php";
     String urlGetSeatR2="http://192.168.1.9/php_ebooking/getSeatRap2.php";
 
 
@@ -62,7 +62,7 @@ public class ChooseSeatActivity extends AppCompatActivity {
         //================= lấy dữ liệu phim rạp truyền qua từ select time activity
         Intent intent=getIntent();
         Bundle bundle=intent.getBundleExtra("DulieuPhimRap");
-        txvTenRap.setText("rạp: "+bundle.getString("IDrap"));
+        txvTenRap.setText("Rạp: "+bundle.getString("IDrap"));
 
         IDphim=bundle.getString("IDphim");
         IDrap=bundle.getString("IDrap");

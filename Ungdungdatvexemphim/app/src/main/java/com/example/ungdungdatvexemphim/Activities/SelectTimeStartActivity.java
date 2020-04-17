@@ -28,7 +28,7 @@ import java.util.Map;
 
 public class SelectTimeStartActivity extends AppCompatActivity {
 
-    String urlgetLichtrinh="http://192.168.1.9/php_ebooking/getLichTrinh.php";
+    String urlgetLichtrinh="http://192.168.1.7:2207/film_booking/getLichTrinh.php";
 
     ListView lvTime;
     ArrayList<LichTrinh> arrLichTrinh;
