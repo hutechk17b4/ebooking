@@ -24,6 +24,8 @@ public class ConfirmBooking extends AppCompatActivity {
         Intent intent=getIntent();
         Bundle bundle=intent.getBundleExtra("BUNDLE_IDSEAT");
 
+        String IDrap=bundle.getString("IDRAP");
+
         int[] seats  = bundle.getIntArray("IDSEAT");
         String []seats2=bundle.getStringArray("HANG");
         StringBuilder data = new StringBuilder();
@@ -44,5 +46,11 @@ public class ConfirmBooking extends AppCompatActivity {
 //            }
 
         }
+        getUser();
+    }
+
+    private void getUser()
+    {
+
     }
 }

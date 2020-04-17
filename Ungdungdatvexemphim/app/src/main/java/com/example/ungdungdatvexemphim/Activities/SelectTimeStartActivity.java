@@ -52,6 +52,8 @@ public class SelectTimeStartActivity extends AppCompatActivity {
         Bundle bundle=intent.getBundleExtra("DuLieuTenPhim");
         IDphim=bundle.getString("IDPHIM");
         TenPhim=bundle.getString("TENPHIM");
+
+
       // postIDphim(IDphim);
         getLichTrinh(IDphim);
 

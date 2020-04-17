@@ -115,6 +115,9 @@ public class DetailedFragment extends Fragment {
                             intent.putExtra("DuLieuTenPhim",bundle);
                             getContext().startActivity(intent);
 
+
+
+
                         }
                         else {
                             Toast.makeText(getContext(),"ko có lịch chiếu",Toast.LENGTH_SHORT).show();

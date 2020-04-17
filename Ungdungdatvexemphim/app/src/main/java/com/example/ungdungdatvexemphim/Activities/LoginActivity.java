@@ -18,9 +18,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.ungdungdatvexemphim.Models.Customer;
 import com.example.ungdungdatvexemphim.R;
 import com.google.android.material.textfield.TextInputLayout;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
@@ -34,7 +40,11 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin,btnSignUp, btnForgotPass;
     private TextInputLayout textInputUserName;
     private TextInputLayout textInputPassWord;
-    String urlLogin = "http://192.168.1.9/php_ebooking/dangnhap.php";
+
+    ArrayList<Customer> customersarr;
+
+    String urlLogin = "http://192.168.1.9/php_ebooking/dangnhap.php";// link lấy thông tin đăng nhập
+    String urlgetDataUser="http://192.168.1.9/php_ebooking/getDataKH.php";// link lấy dữ liệu người dùng sau khi đăng nhập
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
                     "(?=.*[0-9])" +         //at least 1 digit
@@ -65,6 +75,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
         addControls();
+        customersarr =new ArrayList<>();
 
         // cho đối tượng xử lý delay 3000mllisecond
         handler.postDelayed(runnable, 3000);
@@ -83,6 +94,8 @@ public class LoginActivity extends AppCompatActivity {
                 }
                  else{
                     LoginCustomer(urlLogin);
+                    getDataUser();
+
                 }
             }
         });
@@ -130,6 +143,58 @@ public class LoginActivity extends AppCompatActivity {
         };
         requestQueue.add(stringRequest);
     }
+
+
+
+
+    //====================================================================================
+    //=======================================================================================
+    // lấy dữ liệu usersau khi đăng nhập
+    public void  getDataUser()
+    {
+        RequestQueue requestQueue=Volley.newRequestQueue(this);
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlgetDataUser,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray array=new JSONArray(response);
+                            for (int i=0;i<array.length();i++)
+                            {
+                                JSONObject object=array.getJSONObject(i);
+                                int ID=object.getInt("IdKH");
+                                String TenDN=object.getString("TenDN");
+                                String Mail=object.getString("Mail");
+                                customersarr.add(new Customer(ID,TenDN,Mail));
+                                Toast.makeText(LoginActivity.this,ID+""+TenDN+""+Mail,Toast.LENGTH_LONG).show();
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params=new HashMap<>();
+                params.put("TenDangNhapKH",textInputUserName.getEditText().getText().toString().trim());
+                params.put("MatKhauKH",textInputPassWord.getEditText().getText().toString().trim());
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
+
+    }
+
+    //======================================================================================
     // Kiểm tra UserName
     private boolean validateUserName(){
         String usernameInput = textInputUserName.getEditText().getText().toString().trim();

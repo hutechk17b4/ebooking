@@ -21,6 +21,8 @@ public class LichTrinhAdapter extends BaseAdapter {
     private int layout;
     private List<LichTrinh> arrLichtrinh;
 
+
+
     public LichTrinhAdapter(Context context, int layout, List<LichTrinh> arrLichtrinh) {
         this.context = context;
         this.layout = layout;
@@ -69,6 +71,8 @@ public class LichTrinhAdapter extends BaseAdapter {
         holder.txvend.setText(lichTrinh.getEndTime());
 
 
+
+
         holder.btnselecttime.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -77,11 +81,11 @@ public class LichTrinhAdapter extends BaseAdapter {
                 Bundle bundle=new Bundle();
                 bundle.putString("IDphim",lichTrinh.getIDphim());
                 bundle.putString("IDrap",lichTrinh.getIDrap());
+
                 intent.putExtra("DulieuPhimRap",bundle);
                 view.getContext().startActivity(intent);
             }
         });
-
 
         return view;
     }

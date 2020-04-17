@@ -66,6 +66,8 @@ public class ChooseSeatActivity extends AppCompatActivity {
 
         IDphim=bundle.getString("IDphim");
         IDrap=bundle.getString("IDrap");
+
+
         //=========================================================
 
         getDataSeat(IDrap);// lấy dữ liệu ghế
@@ -166,6 +168,7 @@ public class ChooseSeatActivity extends AppCompatActivity {
 
                 bundle.putIntArray("IDSEAT", seats);
                 bundle.putStringArray("HANG", seats2);
+                bundle.putString("IDRAP",IDrap);
                 intent.putExtra("BUNDLE_IDSEAT", bundle);
                 startActivity(intent);
 
