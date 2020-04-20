@@ -42,10 +42,12 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout textInputUserName;
     private TextInputLayout textInputPassWord;
 
+
     ArrayList<Customer> customersarr;
 
     String urlLogin = "http://192.168.1.9/php_ebooking/dangnhap.php";// link lấy thông tin đăng nhập
     String urlgetDataUser="http://192.168.1.9/php_ebooking/getDataKH.php";// link lấy dữ liệu người dùng sau khi đăng nhập
+
 
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +

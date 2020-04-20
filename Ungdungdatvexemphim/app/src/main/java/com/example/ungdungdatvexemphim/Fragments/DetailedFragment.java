@@ -39,7 +39,9 @@ public class DetailedFragment extends Fragment {
 
     String movieTitle, movieRating, movieReleaseDate, movieDesc, movieImagePath,IDmovie;
 
+
     String urlCheckLichTrinh="http://192.168.1.9/php_ebooking/checkLichTrinh.php";
+
 
     // Tạo View từ bản vẽ fragment_detailed.xml
     @Nullable

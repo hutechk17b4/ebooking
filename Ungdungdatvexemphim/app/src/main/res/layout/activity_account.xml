@@ -4,99 +4,189 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/gradient_backgroud"
+    android:orientation="horizontal"
     tools:context="com.example.ungdungdatvexemphim.Activities.AccountActivity">
+
+
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/circleImage"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="40dp"
+        android:src="@drawable/joker">
+
+    </de.hdodenhof.circleimageview.CircleImageView>
+
+    <TextView
+        android:id="@+id/tenUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/circleImage"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="5dp"
+        android:text="Vũ Đình Nhân"
+        android:textColor="#000000"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+    <TextView
+        android:textSize="20sp"
+        android:text="Mail"
+        android:id="@+id/mailUser"
+        android:layout_below="@+id/tenUser"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true">
+
+    </TextView>
+
     <LinearLayout
+        android:id="@+id/linear1"
         android:layout_width="match_parent"
-        android:layout_height="300dp"
-        android:background="@drawable/cinema_orange"
-        android:id="@+id/linearLayout1"
-        android:padding="5dp"
-        android:orientation="vertical">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mailUser"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginTop="140dp"
-            android:src="@drawable/boy_picture"
-            android:id="@+id/imageViewBoy"
-            />
-        <TextView
-            android:id="@+id/tenUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
-            android:text="Tom Cruise"
-            android:textSize="15sp"
-            android:textColor="@color/transparentBlack"
-            android:textStyle="bold"
-            />
-        <TextView
-            android:id="@+id/mailUser"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="TomCruise69@gmail.com"
-            android:textSize="15sp"
-            android:textStyle="bold"
-            android:layout_marginTop="5dp"
-            android:textColor="@color/transparentBlack"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="400dp"
-        android:orientation="vertical"
-        android:padding="5dp"
-        android:layout_below="@id/linearLayout1">
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="70dp"
+            android:src="@drawable/ic_account_circle_black_24dp" />
 
-        <Button
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:text=" Thông tin thành viên "
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear1"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="70dp"
+            android:src="@drawable/icons8_ticket_24px" />
+
+        <TextView
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:text="Đặt vé"
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear2"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="70dp"
+            android:src="@drawable/icons8_order_history_24px" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_bg"
-            android:text="Events"
-            android:textSize="12sp"
+            android:text="Update Profile"
             android:textStyle="italic"
-            android:drawableLeft="@drawable/events_16px"
-            />
-        <Button
+            android:textSize="20sp"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear3"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="70dp"
+            android:src="@drawable/icons8_money_24px" />
+
+        <TextView
+
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Search"
-            android:drawableLeft="@drawable/search_16px"
-            android:background="@drawable/btn_bg"
-            android:textSize="12sp"
-            android:textStyle="italic"/>
-        <Button
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:text=" Ví tiền "
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear5"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear4"
+        android:layout_marginTop="20dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:layout_marginLeft="70dp"
+            android:src="@drawable/icons8_reset_24px" />
+
+        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_bg"
-            android:text=" Settings"
-            android:drawableLeft="@drawable/setting_16px"
-            android:textStyle="italic"
-            android:textSize="12sp"/>
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/btn_bg"
-            android:text="   Update Profile"
-            android:drawableLeft="@drawable/update_profile_16px"
-            android:textStyle="italic"
-            android:textSize="12sp"/>
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="5dp"
+            android:text=" Thay đổi mật khẩu "
+            android:textSize="20dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linear6"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/linear5"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="35dp"
+        android:layout_marginBottom="5dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="36dp"
+            android:layout_height="36dp"
+            android:src="@drawable/ic_exit_to_app_black_24dp" />
+
         <Button
             android:id="@+id/btnLog_out"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/btn_bg"
-            android:text="Logout"
-            android:drawableLeft="@drawable/logout_16px"
-            android:textStyle="italic"
-            android:textSize="12sp"/>
-
-
-
+            android:layout_marginLeft="20dp"
+            android:text="Đăng xuất"
+            android:textSize="20dp"
+            android:textStyle="bold" />
     </LinearLayout>
 
 
 
 </RelativeLayout>
-
-
 

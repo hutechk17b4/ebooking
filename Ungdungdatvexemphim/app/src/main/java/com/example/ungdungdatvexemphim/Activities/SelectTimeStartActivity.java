@@ -29,7 +29,9 @@ import java.util.Map;
 // MÀN HÌNH CHỌN THỜI GIAN BẮT ĐẦU //
 public class SelectTimeStartActivity extends AppCompatActivity {
 
+
     String urlgetLichtrinh="http://192.168.1.9/php_ebooking/getLichTrinh.php";
+
 
     ListView lvTime;
     ArrayList<LichTrinh> arrLichTrinh;

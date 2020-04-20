@@ -35,7 +35,7 @@
 
     <RelativeLayout
         android:id="@+id/ScreenLayou"
-     android:background="@color/white"
+        android:background="@color/white"
         android:layout_below="@+id/txvThongTinPhim"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

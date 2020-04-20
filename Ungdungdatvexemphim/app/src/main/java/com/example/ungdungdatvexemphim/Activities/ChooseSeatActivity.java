@@ -34,17 +34,19 @@ public class ChooseSeatActivity extends AppCompatActivity {
     GridView gvSeat;
 
     Button btnXacNhanChoose;
-    TextView txvTenPhim,txvTenRap;
-    String IDphim="";
-    String IDrap="";
+    TextView txvTenPhim, txvTenRap;
+    String IDphim = "";
+    String IDrap = "";
 
 
     ArrayList<Seat> arrSeat;
     SeatAdapter adapter;
+
     String urlGetTenPhim="http://192.168.1.9/php_ebooking/getTenPhim.php";
 
     String urlGetSeatR="http://192.168.1.9/php_ebooking/getSeatRap.php";
     String urlGetSeatR2="http://192.168.1.9/php_ebooking/getSeatRap2.php";
+
 
 
     @Override
@@ -56,16 +58,15 @@ public class ChooseSeatActivity extends AppCompatActivity {
         gvSeat.setAdapter(adapter);
 
 
-
-
-
         //================= lấy dữ liệu phim rạp truyền qua từ select time activity
-        Intent intent=getIntent();
-        Bundle bundle=intent.getBundleExtra("DulieuPhimRap");
-        txvTenRap.setText("Rạp: "+bundle.getString("IDrap"));
+        Intent intent = getIntent();
+        Bundle bundle = intent.getBundleExtra("DulieuPhimRap");
+        txvTenRap.setText("Rạp: " + bundle.getString("IDrap"));
+
 
         IDphim=bundle.getString("IDphim");
         IDrap=bundle.getString("IDrap");
+
 
 
         //=========================================================
@@ -73,7 +74,6 @@ public class ChooseSeatActivity extends AppCompatActivity {
         getDataSeat(IDrap);// lấy dữ liệu ghế
 
         getTenPhim(IDphim);// gán tên phim vào textview
-
 
 
         xulySuKienData();// xử lý sự kiện truyền dữ liệu ghế đã book
@@ -86,8 +86,8 @@ public class ChooseSeatActivity extends AppCompatActivity {
 
         btnXacNhanChoose = (Button) findViewById(R.id.btnXacNhanBook);
         gvSeat = (GridView) findViewById(R.id.grvSeat);
-        txvTenPhim=(TextView)findViewById(R.id.txvThongTinPhim);
-        txvTenRap=(TextView)findViewById(R.id.txvTenRap);
+        txvTenPhim = (TextView) findViewById(R.id.txvThongTinPhim);
+        txvTenRap = (TextView) findViewById(R.id.txvTenRap);
 
         arrSeat = new ArrayList<>();
 
@@ -103,15 +103,14 @@ public class ChooseSeatActivity extends AppCompatActivity {
     private void getDataSeat(final String ID) {// lấy dữ liệu ghế theo IDrap  ra hihi
 
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlGetSeatR,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, urlGetSeatR,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            JSONArray array=new JSONArray(response);
-                            for (int i=0;i<array.length();i++)
-                            {
-                                JSONObject object=array.getJSONObject(i);
+                            JSONArray array = new JSONArray(response);
+                            for (int i = 0; i < array.length(); i++) {
+                                JSONObject object = array.getJSONObject(i);
                                 int ID = object.getInt("Id");
                                 int Soghe = object.getInt("SoGhe");
                                 String Hangghe = object.getString("HangGhe");
@@ -130,16 +129,15 @@ public class ChooseSeatActivity extends AppCompatActivity {
 
                     }
                 }
-        ){
+        ) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params= new HashMap<>();
-                params.put("IDrapPost",ID);
+                Map<String, String> params = new HashMap<>();
+                params.put("IDrapPost", ID);
                 return params;
             }
         };
         requestQueue.add(stringRequest);
-
 
     }
 
@@ -180,20 +178,19 @@ public class ChooseSeatActivity extends AppCompatActivity {
     //============================================================================
 
 
-//==============================================================================================
+    //==============================================================================================
     private void getTenPhim(final String ID)// lấy tên Phim theo IDphim post lên
     {
-        RequestQueue requestQueue=Volley.newRequestQueue(this);
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlGetTenPhim,
+        RequestQueue requestQueue = Volley.newRequestQueue(this);
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, urlGetTenPhim,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         try {
-                            JSONArray array=new JSONArray(response);
-                            for (int i=0;i<array.length();i++)
-                            {
-                                JSONObject object=array.getJSONObject(i);
-                                String Tenphim=object.getString("tenphim");
+                            JSONArray array = new JSONArray(response);
+                            for (int i = 0; i < array.length(); i++) {
+                                JSONObject object = array.getJSONObject(i);
+                                String Tenphim = object.getString("tenphim");
                                 txvTenPhim.setText(Tenphim);
                             }
                         } catch (JSONException e) {
@@ -209,11 +206,11 @@ public class ChooseSeatActivity extends AppCompatActivity {
 
                     }
                 }
-        ){
+        ) {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> params=new HashMap<>();
-                params.put("IDphimPost",ID);
+                Map<String, String> params = new HashMap<>();
+                params.put("IDphimPost", ID);
                 return params;
             }
         };
