@@ -1,19 +1,98 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/MediumSpringGreen"
     tools:context="com.example.ungdungdatvexemphim.Activities.AccountActivity">
-
-    <TextView
-        android:text="Hello! Activity 5"
-        android:textAlignment="center"
-        android:textSize="50sp"
-        android:id="@+id/text_view_account"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center_horizontal" />
+        android:layout_height="300dp"
+        android:background="@drawable/cinema_orange"
+        android:id="@+id/linearLayout1"
+        android:padding="5dp"
+        android:orientation="vertical">
 
-</LinearLayout>
+        <ImageView
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="140dp"
+            android:src="@drawable/boy_picture"
+            android:id="@+id/imageViewBoy"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="Tom Cruise"
+            android:textSize="15sp"
+            android:textColor="@color/transparentBlack"
+            android:textStyle="bold"
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TomCruise69@gmail.com"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            android:layout_marginTop="5dp"
+            android:textColor="@color/transparentBlack"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:orientation="vertical"
+        android:padding="5dp"
+        android:layout_below="@id/linearLayout1">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_bg"
+            android:text="Events"
+            android:textSize="12sp"
+            android:textStyle="italic"
+            android:drawableLeft="@drawable/events_16px"
+            />
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Search"
+            android:drawableLeft="@drawable/search_16px"
+            android:background="@drawable/btn_bg"
+            android:textSize="12sp"
+            android:textStyle="italic"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_bg"
+            android:text=" Settings"
+            android:drawableLeft="@drawable/setting_16px"
+            android:textStyle="italic"
+            android:textSize="12sp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_bg"
+            android:text="   Update Profile"
+            android:drawableLeft="@drawable/update_profile_16px"
+            android:textStyle="italic"
+            android:textSize="12sp"/>
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/btn_bg"
+            android:text="Logout"
+            android:drawableLeft="@drawable/logout_16px"
+            android:textStyle="italic"
+            android:textSize="12sp"/>
+
+
+
+    </LinearLayout>
+
+
+
+</RelativeLayout>
+
+

@@ -9,8 +9,8 @@ import com.example.ungdungdatvexemphim.R;
 
 public class NewsActivity extends AppCompatActivity {
 
-    TextView textViewNews;
 
+    TextView textViewNews;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
+// MÀN HÌNH CHỌN THỜI GIAN BẮT ĐẦU //
 public class SelectTimeStartActivity extends AppCompatActivity {
 
     String urlgetLichtrinh="http://192.168.1.7:2207/film_booking/getLichTrinh.php";

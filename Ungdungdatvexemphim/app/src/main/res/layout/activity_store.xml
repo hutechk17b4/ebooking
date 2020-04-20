@@ -1,18 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_red_light"
+    android:background="@color/MediumSpringGreen"
     tools:context="com.example.ungdungdatvexemphim.Activities.StoreActivity">
 
     <TextView
-        android:text="Hello! Activity 2"
-        android:textAlignment="center"
-        android:textSize="50sp"
-        android:id="@+id/text_view_store"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center_horizontal" />
-</LinearLayout>
+        android:text="Hello from Activity 2"
+        android:textStyle="bold"
+        android:textSize="50sp"
+        android:gravity="center_horizontal"
+        android:id="@+id/text_view_store"
+        />
+
+</RelativeLayout>

@@ -56,7 +56,7 @@ public class DetailedFragment extends Fragment {
 // Bundle trong Android là một đối tượng dữ liệu được tạo ra nhằm mục dích đóng gói
 // các dữ liệu cần được truyền qua lại giữa các Intent trong Android
         final Bundle bundle = getArguments();
-//  Lấy ra được gói tin trong Bundle
+//  Lấy ra dữ liệu từ màn hình NowPlayingAdapter truyền qua
         movieTitle = bundle.getString("movieTitle");
         movieRating = bundle.getString("movieRating");
         movieDesc = bundle.getString("movieDesc");

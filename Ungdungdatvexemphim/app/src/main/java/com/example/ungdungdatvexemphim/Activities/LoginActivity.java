@@ -77,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
 //                String userName = textInputUserName.getEditText().getText().toString().trim();
 //                String passWord = textInputPassWord.getEditText().getText().toString().trim();
                 if( !validateUserName() |  !validatePassWord()){
-                    Toast.makeText(LoginActivity.this, "Hãy nhập đầy đủ thông tin!, test push lên lại chơi, t xóa dòng thông báo vừa mới push", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Hãy nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
                    
                     
                 }
@@ -182,7 +182,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 }
-    // Vì tạo Function onClick bên activity_login rồi nên không có setOnClickListener()
+
 
 
 
