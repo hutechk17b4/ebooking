@@ -34,7 +34,7 @@ public class LoginActivity extends AppCompatActivity {
     private Button btnLogin,btnSignUp, btnForgotPass;
     private TextInputLayout textInputUserName;
     private TextInputLayout textInputPassWord;
-    String urlLogin = "http://192.168.1.7:2207/film_booking/dangnhap.php";
+    String urlLogin = "http://192.168.1.101/filePHP/dangnhap.php";
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
                     "(?=.*[0-9])" +         //at least 1 digit

@@ -89,7 +89,7 @@
                 android:fontFamily="@font/g_bold"
                 android:paddingLeft="20dp"
                 android:paddingRight="20dp"
-                android:text="Buy Ticket"
+                android:text="Mua vé"
                 android:textAllCaps="false"
                 android:textColor="@color/yellow"
                 android:textSize="14dp" />

@@ -84,10 +84,6 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent3 = new Intent(MainActivity.this, FindActivity.class);
                             startActivity(intent3);
                             return  true;
-                        case R.id.nav_news:
-                            Intent intent4 = new Intent(MainActivity.this, NewsActivity.class);
-                            startActivity(intent4);
-                            return  true;
                         case R.id.nav_account:
                             Intent intent5 = new Intent(MainActivity.this, AccountActivity.class);
                             startActivity(intent5);
