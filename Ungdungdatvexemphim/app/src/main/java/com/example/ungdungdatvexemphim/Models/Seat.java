@@ -63,5 +63,4 @@ public class Seat {
             this.setHinh(R.drawable.seat_sale);
         }
     }
-
 }

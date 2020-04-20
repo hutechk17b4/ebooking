@@ -5,20 +5,27 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context="com.example.ungdungdatvexemphim.Activities.ChooseSeatActivity"
-    android:id="@+id/LayoutChoseSeat">
+    android:id="@+id/LayoutChoseSeat"
+    android:background="@color/yellow"
+    >
 
     <TextView
-        android:textSize="20sp"
-        android:text="Tên Phim"
         android:id="@+id/txvThongTinPhim"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:text="Tên Phim"
+        android:textStyle="bold"
+        android:textColor="@color/black"
+        android:textSize="20sp">
 
     </TextView>
+
     <TextView
         android:id="@+id/txvTenRap"
         android:layout_marginLeft="20dp"
         android:text="Rạp"
+        android:textColor="@color/black"
+        android:textStyle="bold"
         android:layout_toRightOf="@+id/txvThongTinPhim"
         android:textSize="20sp"
         android:layout_width="wrap_content"
@@ -28,19 +35,20 @@
 
     <RelativeLayout
         android:id="@+id/ScreenLayou"
-        android:background="#788DA0"
+     android:background="@color/white"
         android:layout_below="@+id/txvThongTinPhim"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
+
         <TextView
-            android:layout_centerHorizontal="true"
-            android:text="Screen"
-            android:textSize="40sp"
-            android:layout_marginTop="20dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:background="@drawable/ic_screen_256px"
+            android:textSize="40sp">
 
         </TextView>
 
@@ -52,7 +60,7 @@
         android:layout_marginTop="50dp"
         android:layout_below="@id/ScreenLayou"
         android:layout_width="match_parent"
-        android:layout_height="400dp" >
+        android:layout_height="200dp" >
 
     </GridView>
 
@@ -62,7 +70,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/grvSeat"
-        android:text="Book">
+        android:text="Book"
+        android:background="@drawable/et_bg"
+        >
 
     </Button>
 

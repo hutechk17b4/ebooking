@@ -22,6 +22,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ungdungdatvexemphim.Activities.SelectTimeStartActivity;
+import com.example.ungdungdatvexemphim.Models.SessionManagement;
 import com.example.ungdungdatvexemphim.R;
 import com.squareup.picasso.Picasso;
 
@@ -88,6 +89,10 @@ public class DetailedFragment extends Fragment {
 //                ChooseSeatActivity chooseSeatActivity=new ChooseSeatActivity();
 //                Intent intent=new Intent(getContext(), chooseSeatActivity.getClass());
 //                startActivity(intent);
+                SessionManagement sessionManagement=new SessionManagement(getContext());
+                int ID= sessionManagement.getSession();
+                String mail=sessionManagement.getSessionMail();
+                Toast.makeText(getContext(),mail+"",Toast.LENGTH_SHORT).show();
                 CheckLichTrinh();
                 // truyền qua cả tên phim
 
@@ -107,6 +112,7 @@ public class DetailedFragment extends Fragment {
                        // Toast.makeText(getContext(),response,Toast.LENGTH_LONG).show();
                         if(response.equals("success"))
                         {
+
                             SelectTimeStartActivity selectTimeStartActivity=new SelectTimeStartActivity();
                             Intent intent=new Intent(getContext(),selectTimeStartActivity.getClass());
                             Bundle bundle=new Bundle();
@@ -114,7 +120,6 @@ public class DetailedFragment extends Fragment {
                             bundle.putString("IDPHIM",IDmovie);
                             intent.putExtra("DuLieuTenPhim",bundle);
                             getContext().startActivity(intent);
-
 
 
 

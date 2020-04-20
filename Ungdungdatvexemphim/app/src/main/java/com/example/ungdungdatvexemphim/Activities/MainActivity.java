@@ -3,12 +3,14 @@ package com.example.ungdungdatvexemphim.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.ungdungdatvexemphim.Models.SessionManagement;
 import com.example.ungdungdatvexemphim.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
@@ -76,9 +78,10 @@ public class MainActivity extends AppCompatActivity {
                             Intent intent1 = new Intent(MainActivity.this, HomePageActivity.class);
                             startActivity(intent1);
                             return  true;
-                        case R.id.nav_store:
-                            Intent intent2 = new Intent(MainActivity.this, StoreActivity.class);
-                            startActivity(intent2);
+                        case R.id.nav_exit:
+//                            Intent intent2 = new Intent(MainActivity.this, StoreActivity.class);
+//                            startActivity(intent2);
+                            logout();
                             return  true;
                         case R.id.nav_find:
                             Intent intent3 = new Intent(MainActivity.this, FindActivity.class);
@@ -96,6 +99,18 @@ public class MainActivity extends AppCompatActivity {
                     return false;
                 }
             };
+
+    private void logout()
+    {
+        SessionManagement sessionManagement=new SessionManagement(MainActivity.this);
+        sessionManagement.removeSessionMail();
+        Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+        startActivity(intent);
+
+        int ID=sessionManagement.getSession();
+        String mail=sessionManagement.getSessionMail();
+        Toast.makeText(MainActivity.this,mail+"",Toast.LENGTH_LONG).show();
+    }
 
 
     /*public void onBackPressed() {

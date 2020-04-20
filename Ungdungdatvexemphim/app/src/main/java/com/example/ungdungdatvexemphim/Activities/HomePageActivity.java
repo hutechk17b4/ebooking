@@ -1,5 +1,6 @@
 package com.example.ungdungdatvexemphim.Activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.widget.TextView;
 
@@ -15,5 +16,6 @@ public class HomePageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home_page);
         textViewHomePage = findViewById(R.id.text_view_home_page);
+        startActivity(new Intent(HomePageActivity.this, MainActivity.class));
     }
 }

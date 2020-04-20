@@ -16,8 +16,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.ungdungdatvexemphim.Adapters.SeatAdapter;
 import com.example.ungdungdatvexemphim.Models.Seat;
+import com.example.ungdungdatvexemphim.Adapters.SeatAdapter;
 import com.example.ungdungdatvexemphim.R;
 
 import org.json.JSONArray;
@@ -62,7 +62,7 @@ public class ChooseSeatActivity extends AppCompatActivity {
         //================= lấy dữ liệu phim rạp truyền qua từ select time activity
         Intent intent=getIntent();
         Bundle bundle=intent.getBundleExtra("DulieuPhimRap");
-        txvTenRap.setText("rạp: "+bundle.getString("IDrap"));
+        txvTenRap.setText("Rạp: "+bundle.getString("IDrap"));
 
         IDphim=bundle.getString("IDphim");
         IDrap=bundle.getString("IDrap");

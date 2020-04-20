@@ -19,6 +19,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ungdungdatvexemphim.Models.Customer;
+import com.example.ungdungdatvexemphim.Models.SessionManagement;
 import com.example.ungdungdatvexemphim.R;
 import com.google.android.material.textfield.TextInputLayout;
 
@@ -41,10 +42,14 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout textInputUserName;
     private TextInputLayout textInputPassWord;
 
+
+
+
     ArrayList<Customer> customersarr;
 
     String urlLogin = "http://192.168.1.9/php_ebooking/dangnhap.php";// link lấy thông tin đăng nhập
     String urlgetDataUser="http://192.168.1.9/php_ebooking/getDataKH.php";// link lấy dữ liệu người dùng sau khi đăng nhập
+
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +
                     "(?=.*[0-9])" +         //at least 1 digit
@@ -68,7 +73,7 @@ public class LoginActivity extends AppCompatActivity {
             relativeLayout2.setVisibility(View.VISIBLE);
         }
     };
-
+//==================================================================================================
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -76,6 +81,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         addControls();
         customersarr =new ArrayList<>();
+
 
         // cho đối tượng xử lý delay 3000mllisecond
         handler.postDelayed(runnable, 3000);
@@ -89,12 +95,31 @@ public class LoginActivity extends AppCompatActivity {
 //                String passWord = textInputPassWord.getEditText().getText().toString().trim();
                 if( !validateUserName() |  !validatePassWord()){
                     Toast.makeText(LoginActivity.this, "Hãy nhập đầy đủ thông tin!, test push lên lại chơi, t xóa dòng thông báo vừa mới push", Toast.LENGTH_SHORT).show();
-                   
-                    
+
                 }
                  else{
-                    LoginCustomer(urlLogin);
-                    getDataUser();
+                    SessionManagement sessionManagement=new SessionManagement(LoginActivity.this);
+                    // khởi tạo lại giá trị ban đầu cho session
+                    int ID = 0;
+                    String TenDN="";
+                    String Mail="";
+                    Customer customer=new Customer(ID,TenDN,Mail);
+                    sessionManagement.saveSessionMail(customer);
+                    //==== lưu lại giá trị ban đầu cho session
+                    int userID=sessionManagement.getSession();
+                    String userMail=sessionManagement.getSessionMail();
+                    if(!userMail.equals("error"))
+                    {
+                        // login và add lại giá trị session
+                        LoginCustomer(urlLogin);
+
+                    }
+                    else {
+                        // nếu giá trị session vẫn là -1 thì lấy lại dữ liệu và save lại session
+                        getDataUser();
+
+
+                    }
 
                 }
             }
@@ -113,14 +138,17 @@ public class LoginActivity extends AppCompatActivity {
     }
     // Xử lý đăng nhập
     private void LoginCustomer(String url){
+
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
                         if(response.trim().equals("success")){
-                            Toast.makeText(getApplicationContext(), "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
+                           getDataUser();// lấy dữ liệu user sau khi đăng nhập và save vào session
+                           // Toast.makeText(getApplicationContext(), "Đăng nhập thành công!", Toast.LENGTH_SHORT).show();
                             startActivity(new Intent(LoginActivity.this,MainActivity.class));
+
                         }else{
                             Toast.makeText(LoginActivity.this, "Lỗi đăng nhập!", Toast.LENGTH_SHORT).show();
                         }
@@ -145,13 +173,12 @@ public class LoginActivity extends AppCompatActivity {
     }
 
 
-
-
     //====================================================================================
     //=======================================================================================
     // lấy dữ liệu usersau khi đăng nhập
     public void  getDataUser()
     {
+
         RequestQueue requestQueue=Volley.newRequestQueue(this);
         StringRequest stringRequest=new StringRequest(Request.Method.POST, urlgetDataUser,
                 new Response.Listener<String>() {
@@ -165,8 +192,15 @@ public class LoginActivity extends AppCompatActivity {
                                 int ID=object.getInt("IdKH");
                                 String TenDN=object.getString("TenDN");
                                 String Mail=object.getString("Mail");
-                                customersarr.add(new Customer(ID,TenDN,Mail));
-                                Toast.makeText(LoginActivity.this,ID+""+TenDN+""+Mail,Toast.LENGTH_LONG).show();
+
+
+                                // save dữ liệu vào session
+                                Customer customer=new Customer(ID,TenDN,Mail);
+                                customersarr.add(customer);
+                                //Toast.makeText(LoginActivity.this,ID+""+TenDN+""+Mail,Toast.LENGTH_LONG).show();
+                                 SessionManagement sessionManagement=new SessionManagement(LoginActivity.this);
+                                //sessionManagement.saveSession(customer);
+                                sessionManagement.saveSessionMail(customer);
 
                             }
                         } catch (JSONException e) {
