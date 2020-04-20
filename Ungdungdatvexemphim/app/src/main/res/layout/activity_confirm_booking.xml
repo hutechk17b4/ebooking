@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -7,26 +7,31 @@
     tools:context="com.example.ungdungdatvexemphim.Activities.ConfirmBooking">
 
     <TextView
-        android:id="@+id/txvSeatin4"
-
-        android:textSize="30sp"
+        android:layout_centerHorizontal="true"
+        android:text="Tên Phim"
+        android:id="@+id/txvMovieName"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content">
 
     </TextView>
     <TextView
+        android:layout_below="@+id/txvMovieName"
+        android:id="@+id/txvSeatin4"
+        android:textSize="30sp"
+        android:text="số ghế"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+    </TextView>
+
+    <TextView
+        android:id="@+id/txvNameUser"
         android:layout_below="@+id/txvSeatin4"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textStyle="bold"
-        android:textColor="@color/black"
-        android:gravity="center_horizontal"
-        android:textSize="40sp">
-
-
-
-
+        android:text="UserName"
+        android:textSize="20sp">
 
     </TextView>
-</LinearLayout>
+
+</RelativeLayout>

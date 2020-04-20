@@ -42,9 +42,6 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout textInputUserName;
     private TextInputLayout textInputPassWord;
 
-
-
-
     ArrayList<Customer> customersarr;
 
     String urlLogin = "http://192.168.1.9/php_ebooking/dangnhap.php";// link lấy thông tin đăng nhập
@@ -94,6 +91,7 @@ public class LoginActivity extends AppCompatActivity {
 //                String userName = textInputUserName.getEditText().getText().toString().trim();
 //                String passWord = textInputPassWord.getEditText().getText().toString().trim();
                 if( !validateUserName() |  !validatePassWord()){
+
                     Toast.makeText(LoginActivity.this, "Hãy nhập đầy đủ thông tin!, test push lên lại chơi, t xóa dòng thông báo vừa mới push", Toast.LENGTH_SHORT).show();
 
                 }
@@ -104,11 +102,14 @@ public class LoginActivity extends AppCompatActivity {
                     String TenDN="";
                     String Mail="";
                     Customer customer=new Customer(ID,TenDN,Mail);
+                    //================== lưu lại giá trị ban đầu cho session
                     sessionManagement.saveSessionMail(customer);
+                    sessionManagement.saveSessionUserName(customer);
                     //==== lưu lại giá trị ban đầu cho session
-                    int userID=sessionManagement.getSession();
+                  //  int userID=sessionManagement.getSession();
                     String userMail=sessionManagement.getSessionMail();
-                    if(!userMail.equals("error"))
+                    String userName=sessionManagement.getSessionUsername();
+                    if(!userMail.equals("error") || !userName.equals("noname"))
                     {
                         // login và add lại giá trị session
                         LoginCustomer(urlLogin);
@@ -201,6 +202,7 @@ public class LoginActivity extends AppCompatActivity {
                                  SessionManagement sessionManagement=new SessionManagement(LoginActivity.this);
                                 //sessionManagement.saveSession(customer);
                                 sessionManagement.saveSessionMail(customer);
+                                sessionManagement.saveSessionUserName(customer);
 
                             }
                         } catch (JSONException e) {
@@ -281,7 +283,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
 }
-    // Vì tạo Function onClick bên activity_login rồi nên không có setOnClickListener()
+
 
 
 

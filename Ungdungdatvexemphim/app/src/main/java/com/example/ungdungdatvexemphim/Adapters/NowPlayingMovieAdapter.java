@@ -72,7 +72,7 @@ public class NowPlayingMovieAdapter extends RecyclerView.Adapter<NowPlayingMovie
 
         //=============================Xử Lý Đồng Bộ NodeJS ===================================
         try {
-            mSocket= IO.socket("http://192.168.1.9:3000/");
+            mSocket= IO.socket("http://192.168.1.7:3000/");
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -99,14 +99,14 @@ public class NowPlayingMovieAdapter extends RecyclerView.Adapter<NowPlayingMovie
 // Bundle trong Android là một đối tượng dữ liệu được tạo ra nhằm mục dích đóng gói
 // các dữ liệu cần được truyền qua lại giữa các Intent trong Android
                 Bundle bundle = new Bundle();
-//  Đóng gói dữ liệu kiểu string
+//  Đóng gói dữ liệu kiểu String chuẩn bị đưa vào màn hình DetailedFragment
                 bundle.putString("movieTitle",playing.getTitle());
                 bundle.putString("movieRating",rating);
                 bundle.putString("movieReleaseDate",playing.getRelease_date());
                 bundle.putString("movieDesc",playing.getOverview());
                 bundle.putString("moviePosterPath",imgUrl);
                 bundle.putString("IDmovie",playing.getId());
-// Đóng gói bundle vào detailedFragment
+// Đóng gói bundle vào màn hình DetailedFragment
                 detailedFragment.setArguments(bundle);
                 ((MainActivity)context).getSupportFragmentManager()
                         .beginTransaction()
