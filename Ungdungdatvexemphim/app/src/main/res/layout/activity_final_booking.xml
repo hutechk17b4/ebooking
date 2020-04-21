@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gradOrangeStop"
+    android:orientation="vertical"
+    tools:context="com.example.ungdungdatvexemphim.Activities.FinalBookingActivity">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:id="@+id/relativeLayout_movie"
+        android:background="@drawable/movie_theater"
+        />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="380dp">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Tên phim"
+            android:drawableLeft="@drawable/setting_16px"
+            android:background="@drawable/et_bg"
+            android:id="@+id/text_view_title"
+            android:textSize="30sp"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:id="@+id/text_view_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Thời gian"
+            android:drawableLeft="@drawable/setting_16px"
+            android:background="@drawable/et_bg"
+            android:layout_below="@id/text_view_title"
+            android:layout_marginTop="20dp"
+            android:textSize="30sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Loại vé"
+            android:drawableLeft="@drawable/setting_16px"
+            android:background="@drawable/et_bg"
+            android:layout_below="@id/text_view_time"
+            android:id="@+id/text_view_ticket"
+            android:layout_marginTop="20dp"
+            android:textSize="30sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Số lượng"
+            android:drawableLeft="@drawable/setting_16px"
+            android:background="@drawable/et_bg"
+            android:layout_below="@id/text_view_ticket"
+            android:id="@+id/text_view_amount"
+            android:layout_marginTop="20dp"
+            android:textSize="30sp"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text=" Giá tiền"
+            android:drawableLeft="@drawable/setting_16px"
+            android:background="@drawable/et_bg"
+            android:layout_below="@id/text_view_amount"
+            android:id="@+id/text_view_kind_of_ticket"
+            android:layout_marginTop="20dp"
+            android:textSize="30sp"/>
+
+
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/et_bg"
+            android:drawableLeft="@drawable/setting_16px"
+            android:text=" Tên rạp"
+            android:textSize="30sp"
+            android:layout_marginTop="10dp"
+            android:layout_alignParentEnd="true"
+            android:paddingRight="5dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/et_bg"
+            android:drawableLeft="@drawable/setting_16px"
+            android:text=" Tên người book"
+            android:textSize="30sp"
+            android:layout_marginTop="70dp"
+            android:layout_alignParentEnd="true"
+            android:paddingRight="5dp" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="@drawable/et_bg"
+            android:drawableLeft="@drawable/setting_16px"
+            android:text=" Email"
+            android:textSize="30sp"
+            android:layout_marginTop="130dp"
+            android:layout_alignParentEnd="true"
+            android:paddingRight="5dp" />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="320dp"
+            android:text="Xác nhận Book"
+            android:textSize="15sp"
+            android:background="@drawable/btn_bg"
+            />
+    </RelativeLayout>
+
+
+</LinearLayout>

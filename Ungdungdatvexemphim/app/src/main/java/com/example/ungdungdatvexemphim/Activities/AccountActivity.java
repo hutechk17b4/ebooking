@@ -29,10 +29,7 @@ public class AccountActivity extends AppCompatActivity {
             }
         });
 
-
-
     }
-
     private void AnhXa()
     {
         txvname=(TextView)findViewById(R.id.tenUser);
