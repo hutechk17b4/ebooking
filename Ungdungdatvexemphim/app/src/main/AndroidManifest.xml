@@ -15,7 +15,6 @@
         android:theme="@style/AppTheme">
         <activity android:name=".Activities.FinalBookingActivity"></activity>
         <activity android:name=".Activities.SelectTimeStartActivity" />
-        <activity android:name=".Activities.ConfirmBooking" />
         <activity android:name=".Activities.ChooseSeatActivity" />
         <activity android:name=".Activities.TestActivity" />
         <activity android:name=".Activities.AccountActivity" />
