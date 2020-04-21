@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/gradOrangeStop"
+    android:background="@color/yellow"
     android:orientation="vertical"
     tools:context="com.example.ungdungdatvexemphim.Activities.FinalBookingActivity">
 
@@ -23,6 +23,7 @@
             android:layout_height="wrap_content"
             android:text=" Tên phim"
             android:drawableLeft="@drawable/setting_16px"
+            android:textStyle="bold"
 
             android:id="@+id/txvMovieName"
             android:textSize="15sp"
@@ -34,7 +35,7 @@
             android:layout_height="wrap_content"
             android:text=" Thời gian"
             android:drawableLeft="@drawable/setting_16px"
-
+            android:textStyle="bold"
             android:layout_below="@id/txvMovieName"
             android:layout_marginTop="20dp"
             android:textSize="15sp" />
@@ -44,7 +45,7 @@
             android:layout_height="wrap_content"
             android:text=" Loại vé"
             android:drawableLeft="@drawable/setting_16px"
-
+            android:textStyle="bold"
             android:layout_below="@id/txvTime"
             android:id="@+id/text_view_ticket"
             android:layout_marginTop="20dp"
@@ -55,7 +56,7 @@
             android:layout_height="wrap_content"
             android:text=" Số lượng"
             android:drawableLeft="@drawable/setting_16px"
-
+            android:textStyle="bold"
             android:layout_below="@id/text_view_ticket"
             android:id="@+id/txvSeatin4"
             android:layout_marginTop="20dp"
@@ -66,7 +67,7 @@
             android:layout_height="wrap_content"
             android:text=" Giá tiền"
             android:drawableLeft="@drawable/setting_16px"
-
+            android:textStyle="bold"
             android:layout_below="@id/txvSeatin4"
             android:id="@+id/text_view_kind_of_ticket"
             android:layout_marginTop="20dp"
@@ -79,7 +80,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-
+            android:textStyle="bold"
             android:drawableRight="@drawable/setting_16px"
             android:text=" Tên rạp"
             android:textSize="15sp"
@@ -92,7 +93,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-
+            android:textStyle="bold"
             android:drawableRight="@drawable/setting_16px"
             android:text=" Tên người book"
             android:textSize="15sp"
@@ -107,6 +108,7 @@
             android:drawableRight="@drawable/setting_16px"
             android:text=" Email"
             android:textSize="15sp"
+            android:textStyle="bold"
             android:layout_marginTop="130dp"
             android:layout_alignParentEnd="true"
             android:paddingRight="5dp" />
