@@ -167,7 +167,7 @@ public class ChooseSeatActivity extends AppCompatActivity {
 
                 }
 
-                Intent intent = new Intent(ChooseSeatActivity.this, ConfirmBooking.class);
+                Intent intent = new Intent(ChooseSeatActivity.this, FinalBookingActivity.class);
                 Bundle bundle = new Bundle();
 
                 bundle.putIntArray("IDSEAT", seats);

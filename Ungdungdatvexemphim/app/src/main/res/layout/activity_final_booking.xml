@@ -23,88 +23,90 @@
             android:layout_height="wrap_content"
             android:text=" Tên phim"
             android:drawableLeft="@drawable/setting_16px"
-            android:background="@drawable/et_bg"
-            android:id="@+id/text_view_title"
-            android:textSize="30sp"
+
+            android:id="@+id/txvMovieName"
+            android:textSize="15sp"
             android:layout_marginTop="10dp" />
 
         <TextView
-            android:id="@+id/text_view_time"
+            android:id="@+id/txvTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" Thời gian"
             android:drawableLeft="@drawable/setting_16px"
-            android:background="@drawable/et_bg"
-            android:layout_below="@id/text_view_title"
+
+            android:layout_below="@id/txvMovieName"
             android:layout_marginTop="20dp"
-            android:textSize="30sp" />
+            android:textSize="15sp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" Loại vé"
             android:drawableLeft="@drawable/setting_16px"
-            android:background="@drawable/et_bg"
-            android:layout_below="@id/text_view_time"
+
+            android:layout_below="@id/txvTime"
             android:id="@+id/text_view_ticket"
             android:layout_marginTop="20dp"
-            android:textSize="30sp"/>
+            android:textSize="15sp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" Số lượng"
             android:drawableLeft="@drawable/setting_16px"
-            android:background="@drawable/et_bg"
+
             android:layout_below="@id/text_view_ticket"
-            android:id="@+id/text_view_amount"
+            android:id="@+id/txvSeatin4"
             android:layout_marginTop="20dp"
-            android:textSize="30sp"/>
+            android:textSize="15sp"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=" Giá tiền"
             android:drawableLeft="@drawable/setting_16px"
-            android:background="@drawable/et_bg"
-            android:layout_below="@id/text_view_amount"
+
+            android:layout_below="@id/txvSeatin4"
             android:id="@+id/text_view_kind_of_ticket"
             android:layout_marginTop="20dp"
-            android:textSize="30sp"/>
+            android:textSize="15sp"/>
 
 
 
         <TextView
+            android:id="@+id/txvRap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:background="@drawable/et_bg"
-            android:drawableLeft="@drawable/setting_16px"
+
+            android:drawableRight="@drawable/setting_16px"
             android:text=" Tên rạp"
-            android:textSize="30sp"
+            android:textSize="15sp"
             android:layout_marginTop="10dp"
             android:layout_alignParentEnd="true"
             android:paddingRight="5dp" />
 
         <TextView
+            android:id="@+id/txvNameUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:background="@drawable/et_bg"
-            android:drawableLeft="@drawable/setting_16px"
+
+            android:drawableRight="@drawable/setting_16px"
             android:text=" Tên người book"
-            android:textSize="30sp"
+            android:textSize="15sp"
             android:layout_marginTop="70dp"
             android:layout_alignParentEnd="true"
             android:paddingRight="5dp" />
         <TextView
+            android:id="@+id/txvMailUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:background="@drawable/et_bg"
-            android:drawableLeft="@drawable/setting_16px"
+            android:drawableRight="@drawable/setting_16px"
             android:text=" Email"
-            android:textSize="30sp"
+            android:textSize="15sp"
             android:layout_marginTop="130dp"
             android:layout_alignParentEnd="true"
             android:paddingRight="5dp" />
@@ -116,7 +118,7 @@
             android:layout_alignParentRight="true"
             android:layout_marginTop="320dp"
             android:text="Xác nhận Book"
-            android:textSize="15sp"
+            android:textSize="10sp"
             android:background="@drawable/btn_bg"
             />
     </RelativeLayout>

@@ -44,7 +44,7 @@
 
     </TextView>
     <TextView
-        android:id="@+id/txvTimeStart"
+
         android:text="StartTime"
         android:layout_below="@+id/txvRap"
         android:layout_width="wrap_content"
