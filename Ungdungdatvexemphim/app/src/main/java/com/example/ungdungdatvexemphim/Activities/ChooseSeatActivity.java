@@ -37,6 +37,8 @@ public class ChooseSeatActivity extends AppCompatActivity {
     TextView txvTenPhim, txvTenRap;
     String IDphim = "";
     String IDrap = "";
+    String StartTime="";
+    String EndTime="";
 
 
     ArrayList<Seat> arrSeat;
@@ -61,6 +63,8 @@ public class ChooseSeatActivity extends AppCompatActivity {
         //================= lấy dữ liệu phim rạp truyền qua từ select time activity
         Intent intent = getIntent();
         Bundle bundle = intent.getBundleExtra("DulieuPhimRap");
+        StartTime=bundle.getString("StartTime");
+        EndTime=bundle.getString("EndTime");
         txvTenRap.setText("Rạp: " + bundle.getString("IDrap"));
 
 
@@ -144,16 +148,18 @@ public class ChooseSeatActivity extends AppCompatActivity {
 
     //========================================
     public void xulySuKienData() {// lấy và truyền dữ liệu ghế từ trong adapter hihi
+
         btnXacNhanChoose.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int[] seats = new int[arrSeat.size()];// tạo mảng seats = ... [khai báo số lượng phần tử]
+                 String tenphim=txvTenPhim.getText().toString().trim();
+                 String idrap=txvTenRap.getText().toString().trim();
+                int[] seats = new int[arrSeat.size()];// tạo mảng int (vì truyền giá trị id) seats = ... [khai báo số lượng phần tử]
                 String[] seats2 = new String[arrSeat.size()];
                 for (int i = 0; i < arrSeat.size(); i++) {
                     if (arrSeat.get(i).isSelected) {
                         seats[i] = arrSeat.get(i).getSoghe();
                         seats2[i] = arrSeat.get(i).getHangGhe();
-
 
                     } else {
                         seats[i] = -1;
@@ -166,7 +172,10 @@ public class ChooseSeatActivity extends AppCompatActivity {
 
                 bundle.putIntArray("IDSEAT", seats);
                 bundle.putStringArray("HANG", seats2);
-                bundle.putString("IDRAP",IDrap);
+               bundle.putString("TENPHIM",tenphim);
+                bundle.putString("IDRAP",idrap);
+                bundle.putString("Startime",StartTime);
+                bundle.putString("Endtime",EndTime);
                 intent.putExtra("BUNDLE_IDSEAT", bundle);
                 startActivity(intent);
 

@@ -81,6 +81,8 @@ public class LichTrinhAdapter extends BaseAdapter {
                 Bundle bundle=new Bundle();
                 bundle.putString("IDphim",lichTrinh.getIDphim());
                 bundle.putString("IDrap",lichTrinh.getIDrap());
+                bundle.putString("StartTime",lichTrinh.getStartTime());
+                bundle.putString("EndTime",lichTrinh.getEndTime());
 
                 intent.putExtra("DulieuPhimRap",bundle);
                 view.getContext().startActivity(intent);

@@ -7,6 +7,7 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.ungdungdatvexemphim.Models.Seat;
+import com.example.ungdungdatvexemphim.Models.SessionManagement;
 import com.example.ungdungdatvexemphim.R;
 
 import java.util.ArrayList;
@@ -14,17 +15,39 @@ import java.util.ArrayList;
 public class ConfirmBooking extends AppCompatActivity {
 
     ArrayList<Seat> seats;
-    TextView txvseatin4;
+    TextView txvseatin4,txvTenPhim,txvrap,txvNameUser,txvStart,txvEnd;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_confirm_booking);
         txvseatin4=findViewById(R.id.txvSeatin4);
+        txvTenPhim=findViewById(R.id.txvMovieName);
+        txvrap=findViewById(R.id.txvRap);
+        txvNameUser=findViewById(R.id.txvNameUser);
+        txvStart=findViewById(R.id.txvTimeStart);
+        txvEnd=findViewById(R.id.txvTimeEnd);
 
+        getSeatChoosed();
+        getUserBooked();
+
+
+    }
+
+    private void getSeatChoosed()
+    {
         Intent intent=getIntent();
         Bundle bundle=intent.getBundleExtra("BUNDLE_IDSEAT");
 
         String IDrap=bundle.getString("IDRAP");
+        String tenphim=bundle.getString("TENPHIM");
+        String startTime=bundle.getString("Startime");
+        String endTime=bundle.getString("Endtime");
+
+        txvrap.setText(IDrap);
+        txvTenPhim.setText(tenphim);
+        txvStart.setText(startTime);
+        txvEnd.setText(endTime);
+
 
         int[] seats  = bundle.getIntArray("IDSEAT");
         String []seats2=bundle.getStringArray("HANG");
@@ -46,11 +69,14 @@ public class ConfirmBooking extends AppCompatActivity {
 //            }
 
         }
-        getUser();
     }
 
-    private void getUser()
+    private void getUserBooked()
     {
+        SessionManagement sessionManagement=new SessionManagement(ConfirmBooking.this);
+        String Name= sessionManagement.getSessionUsername();
+        txvNameUser.setText(Name);
+
 
     }
 }
