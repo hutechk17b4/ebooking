@@ -39,6 +39,7 @@ public class ChooseSeatActivity extends AppCompatActivity {
     String IDrap = "";
     String StartTime="";
     String EndTime="";
+    String IDlichtrinh="";
 
 
     ArrayList<Seat> arrSeat;
@@ -65,6 +66,8 @@ public class ChooseSeatActivity extends AppCompatActivity {
         Bundle bundle = intent.getBundleExtra("DulieuPhimRap");
         StartTime=bundle.getString("StartTime");
         EndTime=bundle.getString("EndTime");
+        IDlichtrinh=bundle.getString("IDlichtrinh");
+
         txvTenRap.setText("Rạp: " + bundle.getString("IDrap"));
 
 
@@ -154,12 +157,19 @@ public class ChooseSeatActivity extends AppCompatActivity {
             public void onClick(View view) {
                  String tenphim=txvTenPhim.getText().toString().trim();
                  String idrap=txvTenRap.getText().toString().trim();
+
                 int[] seats = new int[arrSeat.size()];// tạo mảng int (vì truyền giá trị id) seats = ... [khai báo số lượng phần tử]
                 String[] seats2 = new String[arrSeat.size()];
+                int [] seatsID=new int[arrSeat.size()];
+                int[] seatsHinh=new int[arrSeat.size()];
+
                 for (int i = 0; i < arrSeat.size(); i++) {
                     if (arrSeat.get(i).isSelected) {
                         seats[i] = arrSeat.get(i).getSoghe();
                         seats2[i] = arrSeat.get(i).getHangGhe();
+                        seatsID[i]=arrSeat.get(i).getID();
+                        seatsHinh[i]=arrSeat.get(i).getHinh();
+
 
                     } else {
                         seats[i] = -1;
@@ -170,10 +180,13 @@ public class ChooseSeatActivity extends AppCompatActivity {
                 Intent intent = new Intent(ChooseSeatActivity.this, FinalBookingActivity.class);
                 Bundle bundle = new Bundle();
 
-                bundle.putIntArray("IDSEAT", seats);
+                bundle.putIntArray("HINHSEAT",seatsHinh);
+                bundle.putIntArray("IDSEAT",seatsID);
+                bundle.putIntArray("SOSEAT", seats);
                 bundle.putStringArray("HANG", seats2);
                bundle.putString("TENPHIM",tenphim);
                 bundle.putString("IDRAP",idrap);
+                bundle.putString("IDlichtrinh",IDlichtrinh);
                 bundle.putString("Startime",StartTime);
                 bundle.putString("Endtime",EndTime);
                 intent.putExtra("BUNDLE_IDSEAT", bundle);

@@ -79,6 +79,7 @@ public class LichTrinhAdapter extends BaseAdapter {
                 ChooseSeatActivity chooseseatactivity= new ChooseSeatActivity();
                 Intent intent=new Intent(view.getContext(),chooseseatactivity.getClass());
                 Bundle bundle=new Bundle();
+                bundle.putString("IDlichtrinh",lichTrinh.getIDlichtrinh());
                 bundle.putString("IDphim",lichTrinh.getIDphim());
                 bundle.putString("IDrap",lichTrinh.getIDrap());
                 bundle.putString("StartTime",lichTrinh.getStartTime());

@@ -63,4 +63,14 @@ public class Seat {
             this.setHinh(R.drawable.seat_sale);
         }
     }
+    public void checkbooked()
+    {
+        if (isBooked==true)
+        {
+            this.setHinh(R.drawable.seat_sold);
+        }
+        else {
+
+        }
+    }
 }

@@ -64,6 +64,12 @@ public class SeatAdapter extends BaseAdapter {
         final Seat seat=SeatList.get(i);
         holder.imgbtnseat.setImageResource(seat.getHinh());
 
+        if(seat.isBooked==true)
+        {
+            seat.checkbooked();
+            holder.imgbtnseat.setImageResource(seat.getHinh());
+        }
+
 
         holder.imgbtnseat.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -84,6 +90,8 @@ public class SeatAdapter extends BaseAdapter {
 
             }
         });
+
+
 
 //            holder.imgbtnseat.setOnClickListener(new View.OnClickListener() {
 //                @Override
