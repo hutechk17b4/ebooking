@@ -21,7 +21,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.example.ungdungdatvexemphim.Activities.SelectTimeStartActivity;
+import com.example.ungdungdatvexemphim.Activities.SelectDateActivity;
 import com.example.ungdungdatvexemphim.Models.SessionManagement;
 import com.example.ungdungdatvexemphim.R;
 import com.squareup.picasso.Picasso;
@@ -40,7 +40,7 @@ public class DetailedFragment extends Fragment {
     String movieTitle, movieRating, movieReleaseDate, movieDesc, movieImagePath,IDmovie;
 
 
-    String urlCheckLichTrinh="http://192.168.1.9/php_ebooking/checkLichTrinh.php";
+    String urlCheckDate="http://192.168.1.7/php_ebooking/checkDate.php";
 
 
     // Tạo View từ bản vẽ fragment_detailed.xml
@@ -107,7 +107,7 @@ public class DetailedFragment extends Fragment {
     public void CheckLichTrinh()
     {
         RequestQueue requestQueue= Volley.newRequestQueue(getContext());
-        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlCheckLichTrinh,
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlCheckDate,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -115,8 +115,8 @@ public class DetailedFragment extends Fragment {
                         if(response.equals("success"))
                         {
 
-                            SelectTimeStartActivity selectTimeStartActivity=new SelectTimeStartActivity();
-                            Intent intent=new Intent(getContext(),selectTimeStartActivity.getClass());
+                            SelectDateActivity selectDateActivity=new SelectDateActivity();
+                            Intent intent=new Intent(getContext(),selectDateActivity.getClass());
                             Bundle bundle=new Bundle();
                             bundle.putString("TENPHIM",movieTitle);
                             bundle.putString("IDPHIM",IDmovie);

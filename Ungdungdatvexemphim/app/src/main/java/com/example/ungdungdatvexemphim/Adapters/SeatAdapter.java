@@ -79,13 +79,13 @@ public class SeatAdapter extends BaseAdapter {
                     seat.isSelected=false;
                     seat.checkselect();
                     holder.imgbtnseat.setImageResource(seat.getHinh());
-                    Toast.makeText(view.getContext(),seat.isSelected+"",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(),seat.isSelected+""+seat.getHangGhe()+" "+seat.getCot(),Toast.LENGTH_SHORT).show();
                 }
                 else {
                     seat.isSelected=true;
                     seat.checkselect();
                     holder.imgbtnseat.setImageResource(seat.getHinh());
-                    Toast.makeText(view.getContext(),seat.isSelected+"",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(view.getContext(),seat.isSelected+""+seat.getHangGhe()+" "+seat.getCot(),Toast.LENGTH_SHORT).show();
                 }
 
             }

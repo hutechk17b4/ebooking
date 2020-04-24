@@ -38,7 +38,7 @@
         android:background="@color/white"
         android:layout_below="@+id/txvThongTinPhim"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="100dp"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp">
 
@@ -57,10 +57,10 @@
     <GridView
         android:id="@+id/grvSeat"
         android:numColumns="3"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="80dp"
         android:layout_below="@id/ScreenLayou"
         android:layout_width="match_parent"
-        android:layout_height="200dp" >
+        android:layout_height="400dp" >
 
     </GridView>
 

@@ -4,21 +4,35 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.example.ungdungdatvexemphim.Models.Seat;
 import com.example.ungdungdatvexemphim.Models.SessionManagement;
 import com.example.ungdungdatvexemphim.R;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public class FinalBookingActivity extends AppCompatActivity {
 
     TextView txvseatin4,txvTenPhim,txvrap,txvNameUser,txvTime,txvmail;
     Button btnConfirm;
     ArrayList<Seat>seatarr;
+    String urlpostSeatBook="http://192.168.1.7/php_ebooking/postSeatBook.php";
+    String urlgetTimeShow="http://192.168.1.7/php_ebooking/getTimeShow.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -27,7 +41,8 @@ public class FinalBookingActivity extends AppCompatActivity {
         getINFORBOOK();
         getUserBooked();
         seatarr=new ArrayList<>();
-        sukienbooked();
+
+
     }
     private void AnhXa()
     {
@@ -46,46 +61,84 @@ public class FinalBookingActivity extends AppCompatActivity {
         Bundle bundle=intent.getBundleExtra("BUNDLE_IDSEAT");
 
         String IDrap=bundle.getString("IDRAP");
-        String tenphim=bundle.getString("TENPHIM");
-        final String startTime=bundle.getString("Startime");
-        String endTime=bundle.getString("Endtime");
-        String IDlichtrinh=bundle.getString("IDlichtrinh");
+        String Tenphim=bundle.getString("TENPHIM");
+
+        final String IDlichtrinh=bundle.getString("IDlichtrinh");
+        getTimeShow(IDlichtrinh);// gọi lại hàm getTime và truyền vào IDlich trình
 
         txvrap.setText(IDrap);
-        txvTenPhim.setText(tenphim);
-        txvTime.setText("start:"+startTime+" - "+"end:"+endTime);
-        Toast.makeText(FinalBookingActivity.this,IDlichtrinh,Toast.LENGTH_SHORT).show();
+        txvTenPhim.setText(Tenphim);
 
 
-        final int [] seatsID=bundle.getIntArray("IDSEAT");
-        int [] seatsHinh=bundle.getIntArray("HINHSEAT");
-        final int[] seats  = bundle.getIntArray("SOSEAT");
-        String []seats2=bundle.getStringArray("HANG");
+
+        final String[] seatCot=bundle.getStringArray("COTGHE");
+        String []seatHang=bundle.getStringArray("HANGGHE");
+       // int [] seatsHinh=bundle.getIntArray("HINHSEAT");
+       // final int[] seats  = bundle.getIntArray("SOSEAT");
+
+
         final StringBuilder data = new StringBuilder();
+        final StringBuilder data2=new StringBuilder();
+        final StringBuilder data3=new StringBuilder();
         //==================================
-        for(int i=0; i<seats.length; i++) {
+        for(int i=0; i<seatCot.length; i++) {
 
-            if(seats[i] != -1 )
+            if(!seatCot[i].equals("null")  )
             {
-                data.append(seats[i]+seats2[i]+" ");
+                data.append(seatCot[i]+seatHang[i]+" ");
+
                 // Toast.makeText(ConfirmBooking.this,data.toString(),Toast.LENGTH_SHORT).show();
                 txvseatin4.setText("Ghế:"+data);
+
 
             }
             else {
 
             }
 
-
-//            final Seat seat=new Seat(seatsID[i],seats2[i],seats[i],seatsHinh[i]);
-//            if(seat.isBooked)
-//            {
-//                seat.getHinh();
-//            }
-
-
+            //================================
         }
-        //================================
+        //=========hết vòng for=======================
+    }
+//================================================================================
+    private void getTimeShow(final String ID)// lấy time start và end dựa theo idlichtrinh được truyền từ chooseSeat
+    {
+        RequestQueue requestQueue= Volley.newRequestQueue(this);
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlgetTimeShow,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray array=new JSONArray(response);
+                            for (int i=0;i<array.length();i++)
+                            {
+                                JSONObject object=array.getJSONObject(i);
+                                String StartTime=object.getString("Starttime");
+                                String EndTime=object.getString("Endtime");
+                                txvTime.setText("start:"+StartTime+" - "+"end:"+EndTime);
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params=new HashMap<>();
+                params.put("IDLichTrinhPost",ID);
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
+
     }
 //==================================================================================
     private void getUserBooked()
@@ -97,8 +150,8 @@ public class FinalBookingActivity extends AppCompatActivity {
         txvmail.setText(mail);
     }
     //=======================================================================
-    private void sukienbooked()
-    {
-
+    private void postdulieubook() {
     }
+
+
 }

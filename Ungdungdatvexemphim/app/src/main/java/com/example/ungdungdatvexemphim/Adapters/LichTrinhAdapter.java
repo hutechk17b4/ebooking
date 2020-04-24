@@ -80,10 +80,11 @@ public class LichTrinhAdapter extends BaseAdapter {
                 Intent intent=new Intent(view.getContext(),chooseseatactivity.getClass());
                 Bundle bundle=new Bundle();
                 bundle.putString("IDlichtrinh",lichTrinh.getIDlichtrinh());
-                bundle.putString("IDphim",lichTrinh.getIDphim());
+              //  bundle.putString("IDphim",lichTrinh.getIDphim());
                 bundle.putString("IDrap",lichTrinh.getIDrap());
-                bundle.putString("StartTime",lichTrinh.getStartTime());
-                bundle.putString("EndTime",lichTrinh.getEndTime());
+                bundle.putString("IDngaychieu",lichTrinh.getIDngaychieu());
+               // bundle.putString("StartTime",lichTrinh.getStartTime());
+              //  bundle.putString("EndTime",lichTrinh.getEndTime());
 
                 intent.putExtra("DulieuPhimRap",bundle);
                 view.getContext().startActivity(intent);

@@ -1,18 +1,18 @@
 package com.example.ungdungdatvexemphim.Models;
 
 public class LichTrinh {
-    String IDlichtrinh;
-    String IDphim;
+   String IDlichtrinh;
     String IDrap;
     String StartTime;
     String EndTime;
+    String IDngaychieu;
 
-    public LichTrinh(String IDlichtrinh, String IDphim, String IDrap, String startTime, String endTime) {
+    public LichTrinh(String IDlichtrinh, String IDrap, String startTime, String endTime, String IDngaychieu) {
         this.IDlichtrinh = IDlichtrinh;
-        this.IDphim = IDphim;
         this.IDrap = IDrap;
         StartTime = startTime;
         EndTime = endTime;
+        this.IDngaychieu = IDngaychieu;
     }
 
     public String getIDlichtrinh() {
@@ -21,14 +21,6 @@ public class LichTrinh {
 
     public void setIDlichtrinh(String IDlichtrinh) {
         this.IDlichtrinh = IDlichtrinh;
-    }
-
-    public String getIDphim() {
-        return IDphim;
-    }
-
-    public void setIDphim(String IDphim) {
-        this.IDphim = IDphim;
     }
 
     public String getIDrap() {
@@ -53,5 +45,13 @@ public class LichTrinh {
 
     public void setEndTime(String endTime) {
         EndTime = endTime;
+    }
+
+    public String getIDngaychieu() {
+        return IDngaychieu;
+    }
+
+    public void setIDngaychieu(String IDngaychieu) {
+        this.IDngaychieu = IDngaychieu;
     }
 }

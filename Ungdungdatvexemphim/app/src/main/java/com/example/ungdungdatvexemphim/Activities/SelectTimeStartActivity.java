@@ -30,13 +30,14 @@ import java.util.Map;
 public class SelectTimeStartActivity extends AppCompatActivity {
 
 
-    String urlgetLichtrinh="http://192.168.1.9/php_ebooking/getLichTrinh.php";
+    String urlgetLichtrinh="http://192.168.1.7/php_ebooking/getLichTrinh.php";
 
 
     ListView lvTime;
     ArrayList<LichTrinh> arrLichTrinh;
     LichTrinhAdapter adapter;
-    String IDphim,TenPhim;
+    String IDDate;
+   public String IDphim;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,15 +51,15 @@ public class SelectTimeStartActivity extends AppCompatActivity {
         adapter=new LichTrinhAdapter(this,R.layout.dong_lichtrinh,arrLichTrinh);
         lvTime.setAdapter(adapter);
 
-        //====================== lấy tên phim từ detail truyền qua đây rồi từ đây truyền qua tiếp màn hình book để hiển thị tên phim và tên rạp
+        //====================== lấy tên phim từ selectDate truyền qua đây rồi từ đây truyền qua tiếp màn hình book để hiển thị tên phim và tên rạp
         Intent intent=getIntent();
-        Bundle bundle=intent.getBundleExtra("DuLieuTenPhim");
-        IDphim=bundle.getString("IDPHIM");
-        TenPhim=bundle.getString("TENPHIM");
+        Bundle bundle=intent.getBundleExtra("DULIEUDATE");
+        IDDate=  bundle.getString("IDngaychieu");
+        IDphim=bundle.getString("IDphim");
 
 
       // postIDphim(IDphim);
-        getLichTrinh(IDphim);
+       getLichTrinh(IDDate);
 
 
     }
@@ -78,11 +79,13 @@ public class SelectTimeStartActivity extends AppCompatActivity {
                             {
                                 JSONObject object=array.getJSONObject(i);
                                 String IDLT= object.getString("Idlichtrinh");
-                                String IDP= object.getString("Idphim");
                                 String IDR= object.getString("Idrap");
                                 String TT= object.getString("Starttime");
                                 String TE= object.getString("Endtime");
-                                arrLichTrinh.add(new LichTrinh(IDLT,IDP,IDR,TT,TE));
+                                String NG=object.getString("Ngay");
+                                LichTrinh lichTrinh=new LichTrinh(IDLT,IDR,TT,TE,NG);
+                                arrLichTrinh.add(lichTrinh);
+                               // arrLichTrinh.add(new LichTrinh(IDLT,IDP,IDR,TT,TE));
 
                             }
                         } catch (JSONException e) {
@@ -103,7 +106,7 @@ public class SelectTimeStartActivity extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params=new HashMap<>();
-                params.put("IDphimPost",ID);
+                params.put("IDngaychieuPost",ID);
                 return params;
             }
         };
