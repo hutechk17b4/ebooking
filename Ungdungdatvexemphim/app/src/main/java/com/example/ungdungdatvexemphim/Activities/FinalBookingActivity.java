@@ -89,7 +89,7 @@ public class FinalBookingActivity extends AppCompatActivity {
         //==================================
         for(int i=0; i<seatCot.length; i++) {
 
-            if(!seatCot[i].equals("null") )
+            if(!seatCot[i].equals("null") && !seatHang[i].equals("null") && !ID[i].equals("null"))
             {
                 data.append(seatCot[i]+seatHang[i]+" ");
 
@@ -99,6 +99,7 @@ public class FinalBookingActivity extends AppCompatActivity {
 
             }
             else {
+
 
             }
             //================================
@@ -114,6 +115,9 @@ public class FinalBookingActivity extends AppCompatActivity {
                         Toast.makeText(FinalBookingActivity.this,"Book thành công",Toast.LENGTH_LONG).show();
                         Intent intent1=new Intent(FinalBookingActivity.this,MainActivity.class);
                         startActivity(intent1);
+                    }
+                    else {
+                        Toast.makeText(FinalBookingActivity.this,"vui lòng chọn ghế ",Toast.LENGTH_SHORT).show();
                     }
                 }
             }

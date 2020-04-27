@@ -203,9 +203,12 @@ public class ChooseSeatActivity extends Activity {
                         seatsCot[i] = "null";
                         seatsHang[i]="null";
                         id[i]="null";
+                       // btnXacNhanChoose.setClickable(false);
                     }
 
                 }
+
+
 
                 Intent intent = new Intent(ChooseSeatActivity.this, FinalBookingActivity.class);
                 Bundle bundle = new Bundle();
@@ -353,7 +356,7 @@ public class ChooseSeatActivity extends Activity {
                                     }
 
                                 }
-                               // Toast.makeText(ChooseSeatActivity.this,cot+" "+hang+" "+ idlichtrinh,Toast.LENGTH_SHORT).show();
+
 
                             }
                         } catch (JSONException e) {

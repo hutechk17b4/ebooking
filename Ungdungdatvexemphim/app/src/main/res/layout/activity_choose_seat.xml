@@ -71,6 +71,7 @@
         android:layout_height="wrap_content"
         android:layout_below="@+id/grvSeat"
         android:text="Book"
+        android:clickable="true"
         android:background="@drawable/et_bg"
         >
 
