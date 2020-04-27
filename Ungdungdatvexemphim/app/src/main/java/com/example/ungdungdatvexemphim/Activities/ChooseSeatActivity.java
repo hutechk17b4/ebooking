@@ -186,8 +186,7 @@ public class ChooseSeatActivity extends Activity {
                 String []seatid=new String[arrSeat.size()];
                 String [] IDrap=new String[arrSeat.size()];
 
-             //   int [] seatsID=new int[arrSeat.size()];
-               // int[] seatsHinh=new int[arrSeat.size()];
+
 
                 for (int i = 0; i < arrSeat.size(); i++) {
                     if (arrSeat.get(i).isSelected) {
@@ -336,9 +335,9 @@ public class ChooseSeatActivity extends Activity {
                                 String IDrap=object.getString("IDrap");
                                 String status=object.getString("trangthai");
                                 Seat seat=new Seat(IDseatno,cot,SeatID,status,IDrap,hang,R.drawable.seat_sold);// IDseatno la ID
+                                seat.isBooked=true;
 
-
-                                String[] seatsCot = new String[arrSeat.size()];// tạo mảng int (vì truyền giá trị id) seats = ... [khai báo số lượng phần tử]
+                                String[] seatsCot = new String[arrSeat.size()];
                                 String[] seatsHang = new String[arrSeat.size()];
                                 String [] IDseat_no=new String[arrSeat.size()];
                                 for (int j=0;j<arrSeat.size();j++)
@@ -348,8 +347,9 @@ public class ChooseSeatActivity extends Activity {
                                     IDseat_no[j]= arrSeat.get(j).getID();
                                     if(seatsCot[j].equals(cot) && seatsHang[j].equals(hang) && IDlichtrinh.equals(idlichtrinh) && IDseat_no[j].equals(IDseatno))
                                     {
+
                                        arrSeat.set(j,seat);
-                                       Toast.makeText(ChooseSeatActivity.this,seatsCot[j]+" "+seatsHang[j]+" "+ idlichtrinh+""+arrSeat.get(j).isBooked,Toast.LENGTH_SHORT).show();
+                                     //  Toast.makeText(ChooseSeatActivity.this,seatsCot[j]+" "+seatsHang[j]+" "+ idlichtrinh+""+arrSeat.get(j).isBooked,Toast.LENGTH_SHORT).show();
                                     }
 
                                 }
