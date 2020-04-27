@@ -2,8 +2,10 @@ package com.example.ungdungdatvexemphim.Activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -58,9 +60,9 @@ public class FinalBookingActivity extends AppCompatActivity {
     private void getINFORBOOK()
     {
         final Intent intent=getIntent();
-        Bundle bundle=intent.getBundleExtra("BUNDLE_IDSEAT");
+        final Bundle bundle=intent.getBundleExtra("BUNDLE_IDSEAT");
 
-        String IDrap=bundle.getString("IDRAP");
+        final String IDrap=bundle.getString("IDRAP");
         String Tenphim=bundle.getString("TENPHIM");
 
         final String IDlichtrinh=bundle.getString("IDlichtrinh");
@@ -72,18 +74,22 @@ public class FinalBookingActivity extends AppCompatActivity {
 
 
         final String[] seatCot=bundle.getStringArray("COTGHE");
-        String []seatHang=bundle.getStringArray("HANGGHE");
+        final String []seatHang=bundle.getStringArray("HANGGHE");
+        final String []ID=bundle.getStringArray("ID");
+        final String []SEATID=bundle.getStringArray("SEATID");
+        final String []IDrappost=bundle.getStringArray("IDRAPpost");
+
+
        // int [] seatsHinh=bundle.getIntArray("HINHSEAT");
        // final int[] seats  = bundle.getIntArray("SOSEAT");
 
 
         final StringBuilder data = new StringBuilder();
-        final StringBuilder data2=new StringBuilder();
-        final StringBuilder data3=new StringBuilder();
+
         //==================================
         for(int i=0; i<seatCot.length; i++) {
 
-            if(!seatCot[i].equals("null")  )
+            if(!seatCot[i].equals("null") )
             {
                 data.append(seatCot[i]+seatHang[i]+" ");
 
@@ -95,10 +101,24 @@ public class FinalBookingActivity extends AppCompatActivity {
             else {
 
             }
-
             //================================
         }
-        //=========hết vòng for=======================
+        btnConfirm.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                for (int i=0;i<ID.length;i++)
+                {
+                    if (!ID[i].equals("null"))
+                    {
+                        postdulieubook(seatCot[i],seatHang[i],IDlichtrinh,ID[i],SEATID[i],IDrappost[i]);
+                        Toast.makeText(FinalBookingActivity.this,"Book thành công",Toast.LENGTH_LONG).show();
+                        Intent intent1=new Intent(FinalBookingActivity.this,MainActivity.class);
+                        startActivity(intent1);
+                    }
+                }
+            }
+        });
+        //================================
     }
 //================================================================================
     private void getTimeShow(final String ID)// lấy time start và end dựa theo idlichtrinh được truyền từ chooseSeat
@@ -150,7 +170,36 @@ public class FinalBookingActivity extends AppCompatActivity {
         txvmail.setText(mail);
     }
     //=======================================================================
-    private void postdulieubook() {
+    private void postdulieubook(final String cot, final String hang, final String idlichtrinh, final String id, final String seatID, final String idrap) {// post dữ liệu ghế đc chọn lên csdl
+        RequestQueue requestQueue=Volley.newRequestQueue(this);
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlpostSeatBook,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        ){
+            @Override
+            protected Map<String,String> getParams() throws AuthFailureError {
+                Map<String,String> params= new HashMap<>();
+                params.put("seat_collumnPost",cot);
+                params.put("seat_rowPost",hang);
+                params.put("IDLichTrinhPost",idlichtrinh);
+                params.put("IDseat_noPost",id);
+                params.put("SeatIDPost",seatID);
+                params.put("IDrapPost",idrap);
+
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
     }
 
 

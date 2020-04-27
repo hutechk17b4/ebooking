@@ -64,32 +64,42 @@ public class SeatAdapter extends BaseAdapter {
         final Seat seat=SeatList.get(i);
         holder.imgbtnseat.setImageResource(seat.getHinh());
 
-        if(seat.isBooked==true)
-        {
-            seat.checkbooked();
-            holder.imgbtnseat.setImageResource(seat.getHinh());
-        }
+//        if(seat.isBooked==true)
+//        {
+//            seat.checkbooked();
+//            holder.imgbtnseat.setImageResource(seat.getHinh());
+//        }
 
 
-        holder.imgbtnseat.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if(seat.isSelected==true)
-                {
-                    seat.isSelected=false;
-                    seat.checkselect();
-                    holder.imgbtnseat.setImageResource(seat.getHinh());
-                    Toast.makeText(view.getContext(),seat.isSelected+""+seat.getHangGhe()+" "+seat.getCot(),Toast.LENGTH_SHORT).show();
+        //seat.checkbooked();
+
+
+            holder.imgbtnseat.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if(seat.isSelected==true)
+                    {
+
+                        seat.isSelected=false;
+                        seat.checkselect();
+                        holder.imgbtnseat.setImageResource(seat.getHinh());
+                        Toast.makeText(view.getContext(),seat.isSelected+""+seat.getHangGhe()+" "+seat.getCot(),Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        seat.isSelected=true;
+                        seat.checkselect();
+                        holder.imgbtnseat.setImageResource(seat.getHinh());
+                        Toast.makeText(view.getContext(),seat.isSelected+""+seat.getHangGhe()+" "+seat.getCot(),Toast.LENGTH_SHORT).show();
+                    }
+
+
                 }
-                else {
-                    seat.isSelected=true;
-                    seat.checkselect();
-                    holder.imgbtnseat.setImageResource(seat.getHinh());
-                    Toast.makeText(view.getContext(),seat.isSelected+""+seat.getHangGhe()+" "+seat.getCot(),Toast.LENGTH_SHORT).show();
-                }
 
-            }
-        });
+            });
+
+
+
+
 
 
 

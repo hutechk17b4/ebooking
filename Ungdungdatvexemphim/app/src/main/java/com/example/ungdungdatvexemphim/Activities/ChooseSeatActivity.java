@@ -1,13 +1,13 @@
 package com.example.ungdungdatvexemphim.Activities;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
+import android.widget.Toast;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
@@ -18,6 +18,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ungdungdatvexemphim.Adapters.SeatAdapter;
 import com.example.ungdungdatvexemphim.Models.Seat;
+import com.example.ungdungdatvexemphim.Models.SeatBooked;
 import com.example.ungdungdatvexemphim.R;
 
 import org.json.JSONArray;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-public class ChooseSeatActivity extends AppCompatActivity {
+public class ChooseSeatActivity extends Activity {
 
 
     GridView gvSeat;
@@ -42,9 +43,12 @@ public class ChooseSeatActivity extends AppCompatActivity {
     String IDngaychieu="";
     String IDlichtrinh="";
 
-
+    ArrayList<SeatBooked> arrbooked;
     ArrayList<Seat> arrSeat;
     SeatAdapter adapter;
+
+    String urlGetSeatBooked="http://192.168.1.7/php_ebooking/getSeatBooked.php";
+    String getUrlGetSeatBooked2="http://192.168.1.7/php_ebooking/getSeatBooked2.php";
 
     String urlGetTenPhim="http://192.168.1.7/php_ebooking/getTenPhim.php";
 
@@ -57,6 +61,12 @@ public class ChooseSeatActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
         setContentView(R.layout.activity_choose_seat);
         AnhXa();
         adapter = new SeatAdapter(this, R.layout.dong_seat, arrSeat);
@@ -80,17 +90,17 @@ public class ChooseSeatActivity extends AppCompatActivity {
 
 
         //=========================================================
+        getDataSeat(IDrap);
 
-        getDataSeat(IDrap);// lấy dữ liệu ghế
+        // lấy dữ liệu ghế
+
 
         getIDphim(IDngaychieu);
 
 
         xulySuKienData();// xử lý sự kiện truyền dữ liệu ghế đã book
-        //===================================================
 
     }
-
 
     private void AnhXa() {
 
@@ -122,13 +132,16 @@ public class ChooseSeatActivity extends AppCompatActivity {
                             for (int i = 0; i < array.length(); i++) {
                                 JSONObject object = array.getJSONObject(i);
                                 String ID = object.getString("Id");
-                                String Cot = object.getString("cot");
+                                String Cot = object.getString("cot");// có
                                 String SeatID=object.getString("seatid");
-                                String status=object.getString("status");
+                                String status=object.getString("status");// có
                                 String idrap=object.getString("idrap");
-                                String Hangghe = object.getString("hang");
-                                Seat seat=new Seat(ID,Cot,SeatID,idrap,status,Hangghe,R.drawable.seat_sale);
+                                String Hangghe = object.getString("hang");// có
+                                Seat seat=new Seat(ID,Cot,SeatID,status,idrap,Hangghe,R.drawable.seat_sale);
                                 arrSeat.add(seat);
+                               // getSeatBooked();
+
+                               getSeatBook(Cot,IDlichtrinh,Hangghe,ID,SeatID,idrap);// load seat đồng thời load seat đã book
 
                             }
                         } catch (JSONException e) {
@@ -169,6 +182,9 @@ public class ChooseSeatActivity extends AppCompatActivity {
 
                 String[] seatsCot = new String[arrSeat.size()];// tạo mảng int (vì truyền giá trị id) seats = ... [khai báo số lượng phần tử]
                 String[] seatsHang = new String[arrSeat.size()];
+                String [] id=new String[arrSeat.size()];
+                String []seatid=new String[arrSeat.size()];
+                String [] IDrap=new String[arrSeat.size()];
 
              //   int [] seatsID=new int[arrSeat.size()];
                // int[] seatsHinh=new int[arrSeat.size()];
@@ -177,12 +193,17 @@ public class ChooseSeatActivity extends AppCompatActivity {
                     if (arrSeat.get(i).isSelected) {
                         seatsCot[i] = arrSeat.get(i).getCot();
                         seatsHang[i] = arrSeat.get(i).getHangGhe();
+                        id[i]=arrSeat.get(i).getID();
+                        seatid[i]=arrSeat.get(i).getSeatID();
+                        IDrap[i]=arrSeat.get(i).getIDrap();
+                     //   IDrap[i]=arrSeat.get(i).getIDrap();
 
 
 
                     } else {
                         seatsCot[i] = "null";
                         seatsHang[i]="null";
+                        id[i]="null";
                     }
 
                 }
@@ -193,9 +214,11 @@ public class ChooseSeatActivity extends AppCompatActivity {
 //                bundle.putIntArray("HINHSEAT",seatsHinh);
 //                bundle.putIntArray("IDSEAT",seatsID);
 //                bundle.putIntArray("SOSEAT", seats);
-//                bundle.putStringArray("HANG", seats2);
+                bundle.putStringArray("ID", id);
+                bundle.putStringArray("SEATID", seatid);
                    bundle.putString("TENPHIM",tenphim);
                     bundle.putString("IDRAP",idrap);
+                    bundle.putStringArray("IDRAPpost",IDrap);
                 bundle.putString("IDlichtrinh",IDlichtrinh);
 //                bundle.putString("Startime",StartTime);
 //                bundle.putString("Endtime",EndTime);
@@ -291,5 +314,89 @@ public class ChooseSeatActivity extends AppCompatActivity {
     }
 
 
+//====================================================================================
+        private void getSeatBook(final String cot,final String idlichtrinh, final String hang, final String id, final String seatID, final String idrap)//
+    {
+        RequestQueue requestQueue=Volley.newRequestQueue(this);
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlGetSeatBooked,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try {
+                            JSONArray array=new JSONArray(response);
+                            for (int i=0;i<array.length();i++)
+                            {
+                                JSONObject object=array.getJSONObject(i);
+                                String cot=object.getString("cot");
+                                String hang=object.getString("hang");
+                                String idlichtrinh=object.getString("Idlichtrinh");
+                                String IDseatno=object.getString("Idseat_no");
+                                String SeatID=object.getString("seatID");
+                                String IDrap=object.getString("IDrap");
+                                String status=object.getString("trangthai");
+                                Seat seat=new Seat(IDseatno,cot,SeatID,status,IDrap,hang,R.drawable.seat_sold);// IDseatno la ID
+
+
+                                String[] seatsCot = new String[arrSeat.size()];// tạo mảng int (vì truyền giá trị id) seats = ... [khai báo số lượng phần tử]
+                                String[] seatsHang = new String[arrSeat.size()];
+                                String [] IDseat_no=new String[arrSeat.size()];
+                                for (int j=0;j<arrSeat.size();j++)
+                                {
+                                    seatsCot[j] = arrSeat.get(j).getCot();
+                                    seatsHang[j]=arrSeat.get(j).getHangGhe();
+                                    IDseat_no[j]= arrSeat.get(j).getID();
+                                    if(seatsCot[j].equals(cot) && seatsHang[j].equals(hang) && IDlichtrinh.equals(idlichtrinh) && IDseat_no[j].equals(IDseatno))
+                                    {
+                                       arrSeat.set(j,seat);
+                                       Toast.makeText(ChooseSeatActivity.this,seatsCot[j]+" "+seatsHang[j]+" "+ idlichtrinh+""+arrSeat.get(j).isBooked,Toast.LENGTH_SHORT).show();
+                                    }
+
+                                }
+                               // Toast.makeText(ChooseSeatActivity.this,cot+" "+hang+" "+ idlichtrinh,Toast.LENGTH_SHORT).show();
+
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                        adapter.notifyDataSetChanged();
+
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(ChooseSeatActivity.this,error.toString(),Toast.LENGTH_SHORT).show();
+
+                    }
+                }
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params= new HashMap<>();
+                params.put("seat_collumnPost",cot);
+                params.put("IDLichTrinhPost",idlichtrinh);
+                params.put("seat_rowPost",hang);
+                params.put("IDseat_noPost",id);
+                params.put("SeatIDPost",seatID);
+                params.put("IDrapPost",idrap);
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
+
+    }
+    //============================================================
+
+
+
+
+
 
 }
+
+
+
+
+

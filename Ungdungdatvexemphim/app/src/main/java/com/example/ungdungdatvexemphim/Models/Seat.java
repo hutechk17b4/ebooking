@@ -15,12 +15,12 @@ public class Seat {
     public boolean isBooked = false;
 
 
-    public Seat(String ID, String cot, String seatID, String IDrap, String status, String hangGhe, int hinh) {
+    public Seat(String ID, String cot, String seatID, String status, String IDrap, String hangGhe, int hinh) {
         this.ID = ID;
         Cot = cot;
         SeatID = seatID;
-        this.IDrap = IDrap;
         Status = status;
+        this.IDrap = IDrap;
         HangGhe = hangGhe;
         Hinh = hinh;
     }
@@ -98,6 +98,7 @@ public class Seat {
             this.setHinh(R.drawable.seat_sold);
         }
         else {
+            this.setHinh(R.drawable.seat_sale);
 
         }
     }
