@@ -14,7 +14,7 @@ import com.example.ungdungdatvexemphim.R;
 
 public class AccountActivity extends AppCompatActivity {
     Button btnlogout;
-    TextView txvname,txvmail;
+    TextView txvname,txvmail,txvHistoryBook;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,6 +28,8 @@ public class AccountActivity extends AppCompatActivity {
                 event_logout();
             }
         });
+        //====================================
+        clickHistory();
 
     }
     private void AnhXa()
@@ -35,12 +37,14 @@ public class AccountActivity extends AppCompatActivity {
         txvname=(TextView)findViewById(R.id.tenUser);
         txvmail=(TextView)findViewById(R.id.mailUser);
         btnlogout=(Button)findViewById(R.id.btnLog_out);
+        txvHistoryBook=(TextView)findViewById(R.id.txvHistory);
     }
     private void event_logout()
     {
         SessionManagement sessionManagement=new SessionManagement(AccountActivity.this);
         sessionManagement.removeSessionMail();
         sessionManagement.removeSessionUsername();
+        sessionManagement.removeSession();// remove IDuser
         Intent intent=new Intent(AccountActivity.this,LoginActivity.class);
         startActivity(intent);
 
@@ -58,5 +62,15 @@ public class AccountActivity extends AppCompatActivity {
         String mailuser=sessionManagement.getSessionMail();
         txvname.setText(username);
         txvmail.setText(mailuser);
+    }
+    private void clickHistory()
+    {
+        txvHistoryBook.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent=new Intent(AccountActivity.this,HistoryBookActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }

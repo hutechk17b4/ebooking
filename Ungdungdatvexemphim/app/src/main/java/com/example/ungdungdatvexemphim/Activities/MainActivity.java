@@ -3,12 +3,14 @@ package com.example.ungdungdatvexemphim.Activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.example.ungdungdatvexemphim.Models.SessionManagement;
 import com.example.ungdungdatvexemphim.R;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.tabs.TabLayout;
@@ -65,6 +67,26 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    //==============================================================================
+
+    @Override
+    public void onBackPressed() {
+        SessionManagement sessionManagement=new SessionManagement(MainActivity.this);
+        sessionManagement.removeSessionMail();
+        sessionManagement.removeSessionUsername();
+        sessionManagement.removeSession();
+        Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+        startActivity(intent);
+
+        //  int ID=sessionManagement.getSession();
+        int ID=sessionManagement.getSession();
+        String name=sessionManagement.getSessionUsername();
+        String mail=sessionManagement.getSessionMail();
+        Toast.makeText(MainActivity.this,mail+" "+name+""+ID,Toast.LENGTH_LONG).show();
+        super.onBackPressed();
+    }
+
+    //==============================================================================
 
     // Xử lý sự kiện lắng nghe khi click vào icon trên Bottom Navigation
     private BottomNavigationView.OnNavigationItemSelectedListener navListener =
