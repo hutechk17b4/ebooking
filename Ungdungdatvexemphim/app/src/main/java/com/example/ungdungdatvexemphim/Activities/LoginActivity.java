@@ -139,6 +139,22 @@ public class LoginActivity extends AppCompatActivity {
             }
              });
     }
+    //===========================================================
+
+//    @Override
+//    protected void onResume() {
+//        SessionManagement sessionManagement=new SessionManagement(LoginActivity.this);
+////        int ID = 0;
+////        String TenDN="";
+////        String Mail="";
+////        Customer customer=new Customer(ID,TenDN,Mail);
+//        sessionManagement.removeSession();
+//        sessionManagement.removeSessionMail();
+//        sessionManagement.getSessionUsername();
+//        super.onResume();
+//    }
+
+    //=========================================================
     // Xử lý đăng nhập
     private void LoginCustomer(String url){
 
@@ -202,7 +218,7 @@ public class LoginActivity extends AppCompatActivity {
                                 customersarr.add(customer);
                                 //Toast.makeText(LoginActivity.this,ID+""+TenDN+""+Mail,Toast.LENGTH_LONG).show();
                                  SessionManagement sessionManagement=new SessionManagement(LoginActivity.this);
-                                //sessionManagement.saveSession(customer);
+                                sessionManagement.saveSession(customer);
                                 sessionManagement.saveSessionMail(customer);
                                 sessionManagement.saveSessionUserName(customer);
 

@@ -13,7 +13,8 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Activities.SelectDateActivity"></activity>
+        <activity android:name=".Activities.HistoryBookActivity"></activity>
+        <activity android:name=".Activities.SelectDateActivity" />
         <activity android:name=".Activities.FinalBookingActivity" />
         <activity android:name=".Activities.SelectTimeStartActivity" />
         <activity android:name=".Activities.ChooseSeatActivity" />
