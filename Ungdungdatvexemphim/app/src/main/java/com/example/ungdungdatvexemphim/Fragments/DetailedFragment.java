@@ -40,7 +40,7 @@ public class DetailedFragment extends Fragment {
     String movieTitle, movieRating, movieReleaseDate, movieDesc, movieImagePath,IDmovie;
 
 
-    String urlCheckDate="http://192.168.1.7/php_ebooking/checkDate.php";
+    String urlCheckDate="http://192.168.1.4/PHPData/checkDate.php";
 
 
     // Tạo View từ bản vẽ fragment_detailed.xml

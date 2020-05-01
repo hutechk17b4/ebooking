@@ -30,19 +30,19 @@ import java.util.Map;
 
 public class FinalBookingActivity extends AppCompatActivity {
 
-    TextView txvseatin4,txvTenPhim,txvrap,txvNameUser,txvTime,txvmail;
+    TextView txvseatin4,txvTenPhim,txvrap,txvNameUser,txvTime,txvmail,txvdate;
     Button btnConfirm;
     ArrayList<Seat>seatarr;
-    String urlpostSeatBook="http://192.168.1.7/php_ebooking/postSeatBook.php";
-    String urlgetTimeShow="http://192.168.1.7/php_ebooking/getTimeShow.php";
+    String urlpostSeatBook="http://192.168.1.4/PHPData/postSeatBook.php";
+    String urlgetTimeShow="http://192.168.1.4/PHPData/getTimeShow.php";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_final_booking);
+        setContentView(R.layout.activity_result_ticket);
         AnhXa();
         getINFORBOOK();
         getUserBooked();
-        seatarr=new ArrayList<>();
+        seatarr = new ArrayList<>();
 
 
     }
@@ -55,6 +55,7 @@ public class FinalBookingActivity extends AppCompatActivity {
         txvTime=findViewById(R.id.txvTime);
         txvmail=findViewById(R.id.txvMailUser);
         btnConfirm=findViewById(R.id.btnBookFinal);
+        txvdate=findViewById(R.id.txvDate);
     }
 
     private void getINFORBOOK()
@@ -62,10 +63,10 @@ public class FinalBookingActivity extends AppCompatActivity {
         final Intent intent=getIntent();
         final Bundle bundle=intent.getBundleExtra("BUNDLE_IDSEAT");
 
-        final String IDrap=bundle.getString("IDRAP");
-        String Tenphim=bundle.getString("TENPHIM");
+        final String IDrap = bundle.getString("IDRAP");
+        String Tenphim = bundle.getString("TENPHIM");
 
-        final String IDlichtrinh=bundle.getString("IDlichtrinh");
+        final String IDlichtrinh = bundle.getString("IDlichtrinh");
         getTimeShow(IDlichtrinh);// gọi lại hàm getTime và truyền vào IDlich trình
 
         txvrap.setText(IDrap);
@@ -117,7 +118,7 @@ public class FinalBookingActivity extends AppCompatActivity {
                         startActivity(intent1);
                     }
                     else {
-                        Toast.makeText(FinalBookingActivity.this,"vui lòng chọn ghế ",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(FinalBookingActivity.this,"Vui lòng chọn ghế ",Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -139,7 +140,7 @@ public class FinalBookingActivity extends AppCompatActivity {
                                 JSONObject object=array.getJSONObject(i);
                                 String StartTime=object.getString("Starttime");
                                 String EndTime=object.getString("Endtime");
-                                txvTime.setText("start:"+StartTime+" - "+"end:"+EndTime);
+                                txvTime.setText("Start:"+StartTime+"  "+"End:  "+EndTime);
 
                             }
                         } catch (JSONException e) {
