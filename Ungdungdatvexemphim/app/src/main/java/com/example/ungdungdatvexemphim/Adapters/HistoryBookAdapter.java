@@ -1,6 +1,8 @@
 package com.example.ungdungdatvexemphim.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.example.ungdungdatvexemphim.Activities.DetailBookActivity;
 import com.example.ungdungdatvexemphim.Models.HistoryBook;
 import com.example.ungdungdatvexemphim.R;
 
@@ -18,6 +21,8 @@ public class HistoryBookAdapter extends BaseAdapter {
     private Context context;
     private int layout;
     private List<HistoryBook> arrhistorybook;
+
+
 
     public HistoryBookAdapter(Context context, int layout, List<HistoryBook> arrhistorybook) {
         this.context = context;
@@ -46,6 +51,8 @@ public class HistoryBookAdapter extends BaseAdapter {
         Button btnDetail;
     }
 
+
+
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         ViewHolder holder;
@@ -61,8 +68,33 @@ public class HistoryBookAdapter extends BaseAdapter {
         else {
             holder= (ViewHolder) convertView.getTag();
         }
-        HistoryBook historyBook=arrhistorybook.get(position);
+
+        final HistoryBook historyBook=arrhistorybook.get(position);
         holder.txvTimeCreate.setText(historyBook.getTimeCreate());
+
+
+
+
+        final View finalConvertView = convertView;
+        holder.btnDetail.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent=new Intent(finalConvertView.getContext(), DetailBookActivity.class);
+                    Bundle bundle=new Bundle();
+                    bundle.putString("IDBOOK",historyBook.getIDBooking());
+                    bundle.putString("TIMECRE",historyBook.getTimeCreate());
+                    intent.putExtra("DULIEUBOOK",bundle);
+                    finalConvertView.getContext().startActivity(intent);
+
+                }
+            });
+
+
+
+
+
+
+
         return convertView;
     }
 }

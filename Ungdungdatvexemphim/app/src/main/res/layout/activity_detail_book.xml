@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout android:layout_height="wrap_content" android:layout_width="wrap_content" xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <TextView
+        android:id="@+id/txvIDbooking"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="IDBooking">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/txvtenKhachHang"
+        android:layout_below="@+id/txvIDbooking"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="userName">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/txvTimecreate"
+        android:layout_below="@+id/txvtenKhachHang"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="timecreate">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/txvIDseatno"
+        android:layout_below="@+id/txvTimecreate"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="idseat">
+
+    </TextView>
+
+    <TextView
+        android:id="@+id/txvTenPhim"
+        android:layout_below="@+id/txvIDseatno"
+        android:textSize="20sp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="tenphim">
+
+    </TextView>
+
+    <TextView
+        android:textSize="20sp"
+        android:text="time start"
+        android:id="@+id/txvTimestartshow"
+        android:layout_below="@+id/txvTenPhim"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+    </TextView>
+
+</RelativeLayout>

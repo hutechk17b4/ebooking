@@ -19,6 +19,7 @@ import com.android.volley.toolbox.Volley;
 import com.example.ungdungdatvexemphim.Adapters.SeatAdapter;
 import com.example.ungdungdatvexemphim.Models.Seat;
 import com.example.ungdungdatvexemphim.Models.SeatBooked;
+import com.example.ungdungdatvexemphim.Models.Ticket;
 import com.example.ungdungdatvexemphim.R;
 
 import org.json.JSONArray;
@@ -43,12 +44,14 @@ public class ChooseSeatActivity extends Activity {
     String IDngaychieu="";
     String IDlichtrinh="";
 
+    ArrayList<Ticket> arrticket;
     ArrayList<SeatBooked> arrbooked;
     ArrayList<Seat> arrSeat;
     SeatAdapter adapter;
 
     String urlGetSeatBooked="http://192.168.1.7/php_ebooking/getSeatBooked.php";
     String getUrlGetSeatBooked2="http://192.168.1.7/php_ebooking/getSeatBooked2.php";
+    String urlgetTicket="http://192.168.1.7/php_ebooking/getTicket.php";
 
     String urlGetTenPhim="http://192.168.1.7/php_ebooking/getTenPhim.php";
 
@@ -186,6 +189,7 @@ public class ChooseSeatActivity extends Activity {
                 String []seatid=new String[arrSeat.size()];
                 String [] IDrap=new String[arrSeat.size()];
 
+            //    String [] Giave=new String[arrticket.size()];
 
 
                 for (int i = 0; i < arrSeat.size(); i++) {
@@ -195,7 +199,17 @@ public class ChooseSeatActivity extends Activity {
                         id[i]=arrSeat.get(i).getID();
                         seatid[i]=arrSeat.get(i).getSeatID();
                         IDrap[i]=arrSeat.get(i).getIDrap();
-                     //   IDrap[i]=arrSeat.get(i).getIDrap();
+//                        getTicket(seatid[i],IDrap[i]);
+//
+//                        for (int j=0;j<arrticket.size();j++)
+//                        {
+//
+//                            Giave[j]=arrticket.get(j).getGia();
+//
+//                        }
+
+
+                        //   IDrap[i]=arrSeat.get(i).getIDrap();
 
 
 
@@ -221,6 +235,7 @@ public class ChooseSeatActivity extends Activity {
                    bundle.putString("TENPHIM",tenphim);
                     bundle.putString("IDRAP",idrap);
                     bundle.putStringArray("IDRAPpost",IDrap);
+
                 bundle.putString("IDlichtrinh",IDlichtrinh);
 //                bundle.putString("Startime",StartTime);
 //                bundle.putString("Endtime",EndTime);
@@ -391,6 +406,64 @@ public class ChooseSeatActivity extends Activity {
 
     }
     //============================================================
+    //=============================================================
+//    private void getTicket(final String seatid, final String idrap)
+//    {
+//        RequestQueue requestQueue=Volley.newRequestQueue(this);
+//        StringRequest stringRequest = new StringRequest(Request.Method.POST, urlgetTicket,
+//                new Response.Listener<String>() {
+//                    @Override
+//                    public void onResponse(String response) {
+//                        try {
+//                            JSONArray array=new JSONArray(response);
+//                            for (int i=0;i<array.length();i++)
+//                            {
+//                                JSONObject object=array.getJSONObject(i);
+//                                String id= object.getString("IDticket");
+//                                String gia= object.getString("gia");
+//                                String loai= object.getString("loai");
+//                                Ticket ticket=new Ticket(id,gia,loai);
+//                                arrticket.add(ticket);
+//
+//
+//                            }
+//
+//                        } catch (JSONException e) {
+//                            e.printStackTrace();
+//                        }
+//
+//                    }
+//                },
+//                new Response.ErrorListener() {
+//                    @Override
+//                    public void onErrorResponse(VolleyError error) {
+//
+//                    }
+//                }
+//        ){
+//            @Override
+//            protected Map<String, String> getParams() throws AuthFailureError {
+//                Map<String,String> params= new HashMap<>();
+//                params.put("seatIDPost",seatid);
+//                params.put("IDrapPost",idrap);
+//                return params;
+//            }
+//        };
+//        requestQueue.add(stringRequest);
+//
+//    }
+    //============================
+//    private void showprice()
+//    {
+//        String Gia[]=new String[arrticket.size()];
+//        final StringBuilder data = new StringBuilder();
+//        for (int j=0;j<arrticket.size();j++)
+//        {
+//            Gia[j]=arrticket.get(j).getGia();
+//            data.append(Gia[j]+" ");
+//            txvPrice.setText("Giá :" +data);
+//        }
+//    }
 
 
 

@@ -20,6 +20,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ungdungdatvexemphim.Models.Seat;
 import com.example.ungdungdatvexemphim.Models.SessionManagement;
+import com.example.ungdungdatvexemphim.Models.Ticket;
 import com.example.ungdungdatvexemphim.R;
 
 import org.json.JSONArray;
@@ -36,13 +37,19 @@ public class FinalBookingActivity extends AppCompatActivity {
     String tenKH="";
 
 
-    TextView txvseatin4,txvTenPhim,txvrap,txvNameUser,txvTime,txvmail;
+
+    TextView txvseatin4,txvTenPhim,txvrap,txvNameUser,txvTime,txvmail,txvPrice;
     Button btnConfirm;
+
+    ArrayList<Ticket> arrticket;
     ArrayList<Seat>seatarr;
+
+
     String urlpostSeatBook="http://192.168.1.7/php_ebooking/postSeatBook.php";
     String urlgetTimeShow="http://192.168.1.7/php_ebooking/getTimeShow.php";
-    String urlgetIDKH="http://192.168.1.7/php_ebooking/getIDKachHang.php";
+//    String urlgetIDKH="http://192.168.1.7/php_ebooking/getIDKachHang.php";
     String urlinsertBooking="http://192.168.1.7/php_ebooking/insertBooking.php";
+
     @RequiresApi(api = Build.VERSION_CODES.O)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,13 +61,7 @@ public class FinalBookingActivity extends AppCompatActivity {
         getINFORBOOK();
         getUserBooked();
         seatarr=new ArrayList<>();
-
-
-
-
-
-
-
+        arrticket=new ArrayList<>();
 
 
 
@@ -75,6 +76,7 @@ public class FinalBookingActivity extends AppCompatActivity {
         txvTime=findViewById(R.id.txvTime);
         txvmail=findViewById(R.id.txvMailUser);
         btnConfirm=findViewById(R.id.btnBookFinal);
+        txvPrice=findViewById(R.id.txvprice);
     }
 
     private void getINFORBOOK()
@@ -83,7 +85,7 @@ public class FinalBookingActivity extends AppCompatActivity {
         final Bundle bundle=intent.getBundleExtra("BUNDLE_IDSEAT");
 
         final String IDrap=bundle.getString("IDRAP");
-        String Tenphim=bundle.getString("TENPHIM");
+        final String Tenphim=bundle.getString("TENPHIM");
 
         final String IDlichtrinh=bundle.getString("IDlichtrinh");
         getTimeShow(IDlichtrinh);// gọi lại hàm getTime và truyền vào IDlich trình
@@ -100,11 +102,17 @@ public class FinalBookingActivity extends AppCompatActivity {
         final String []IDrappost=bundle.getStringArray("IDRAPpost");
 
 
+
+
+
        // int [] seatsHinh=bundle.getIntArray("HINHSEAT");
        // final int[] seats  = bundle.getIntArray("SOSEAT");
 
 
         final StringBuilder data = new StringBuilder();
+        final StringBuilder data2 = new StringBuilder();
+
+        //==============================================
 
         //==================================
         for(int i=0; i<seatCot.length; i++) {
@@ -124,6 +132,13 @@ public class FinalBookingActivity extends AppCompatActivity {
             }
             //================================
         }
+
+        //================================================================================
+
+
+
+
+        //===============================================================================
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -132,13 +147,14 @@ public class FinalBookingActivity extends AppCompatActivity {
                     if (!ID[i].equals("null"))
                     {
                         postdulieubook(seatCot[i],seatHang[i],IDlichtrinh,ID[i],SEATID[i],IDrappost[i]);
+                        insertBooking(ID[i],Tenphim,IDlichtrinh);
                         Toast.makeText(FinalBookingActivity.this,"Book thành công",Toast.LENGTH_LONG).show();
-                        insertBooking();
+
 
                        // break;
                     }
                     else {
-                        Toast.makeText(FinalBookingActivity.this,"vui lòng chọn ghế ",Toast.LENGTH_SHORT).show();
+
 
                     }
                 }
@@ -208,7 +224,7 @@ public class FinalBookingActivity extends AppCompatActivity {
 
                         }
                         else {
-
+                            Toast.makeText(FinalBookingActivity.this,"vui lòng chọn ghế ",Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
@@ -240,7 +256,7 @@ public class FinalBookingActivity extends AppCompatActivity {
 
     //==============================================================================
 
-    private void insertBooking(){// insert dữ liệu book theo user vào table booking
+    private void insertBooking(final String idseatno, final String tenphim, final String idlichtrinh){// insert dữ liệu book theo user vào table booking
         RequestQueue requestQueue=Volley.newRequestQueue(this);
         StringRequest stringRequest=new StringRequest(Request.Method.POST, urlinsertBooking,
                 new Response.Listener<String>() {
@@ -270,12 +286,21 @@ public class FinalBookingActivity extends AppCompatActivity {
 
                 params.put("IDKhachHangPost",ID+"");
                 params.put("TimeCreatePost",dtf.format(now));
+                params.put("IDSeat_noPost",idseatno);
+                params.put("TenPhimPost",tenphim);
+                params.put("IDLichTrinhPost",idlichtrinh);
 
                 return params;
             }
         };
         requestQueue.add(stringRequest);
     }
+    //======================================================================
+
+
+
+    //======================================================================
+
 
 
 

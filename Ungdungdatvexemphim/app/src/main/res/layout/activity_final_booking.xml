@@ -69,7 +69,7 @@
             android:drawableLeft="@drawable/setting_16px"
             android:textStyle="bold"
             android:layout_below="@id/txvSeatin4"
-            android:id="@+id/text_view_kind_of_ticket"
+            android:id="@+id/txvprice"
             android:layout_marginTop="20dp"
             android:textSize="15sp"/>
 

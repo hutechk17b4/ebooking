@@ -48,6 +48,8 @@ public class NowPlayingFragment extends Fragment {
         return view;
     }
 
+
+
 // Hàm lấy dữ liệu Phim và
     // Thực hiện Request đến API và xử lý kết quả trả về :
     public void getMovieData(String apiKey){
