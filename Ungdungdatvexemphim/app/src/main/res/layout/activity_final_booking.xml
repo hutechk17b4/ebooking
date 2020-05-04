@@ -9,109 +9,106 @@
     tools:context="com.example.ungdungdatvexemphim.Activities.FinalBookingActivity">
 
     <RelativeLayout
+        android:id="@+id/relativeLayout_movie"
         android:layout_width="match_parent"
         android:layout_height="280dp"
-        android:id="@+id/relativeLayout_movie"
-        android:background="@drawable/movie_theater"
+
         />
 
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="380dp">
+
         <TextView
+            android:id="@+id/txvMovieName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" Tên phim"
+            android:layout_marginTop="10dp"
             android:drawableLeft="@drawable/setting_16px"
-            android:textStyle="bold"
 
-            android:id="@+id/txvMovieName"
+            android:text=" Tên phim"
             android:textSize="15sp"
-            android:layout_marginTop="10dp" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txvTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" Thời gian"
-            android:drawableLeft="@drawable/setting_16px"
-            android:textStyle="bold"
             android:layout_below="@id/txvMovieName"
             android:layout_marginTop="20dp"
-            android:textSize="15sp" />
+            android:drawableLeft="@drawable/setting_16px"
+            android:text=" Thời gian"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text=" Loại vé"
-            android:drawableLeft="@drawable/setting_16px"
-            android:textStyle="bold"
-            android:layout_below="@id/txvTime"
             android:id="@+id/text_view_ticket"
-            android:layout_marginTop="20dp"
-            android:textSize="15sp"/>
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" Số lượng"
+            android:layout_below="@id/txvTime"
+            android:layout_marginTop="20dp"
             android:drawableLeft="@drawable/setting_16px"
-            android:textStyle="bold"
-            android:layout_below="@id/text_view_ticket"
+            android:text=" Loại vé"
+            android:textSize="15sp"
+            android:textStyle="bold" />
+
+        <TextView
             android:id="@+id/txvSeatin4"
-            android:layout_marginTop="20dp"
-            android:textSize="15sp"/>
-
-        <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" Giá tiền"
-            android:drawableLeft="@drawable/setting_16px"
-            android:textStyle="bold"
-            android:layout_below="@id/txvSeatin4"
-            android:id="@+id/txvprice"
+            android:layout_below="@id/text_view_ticket"
             android:layout_marginTop="20dp"
-            android:textSize="15sp"/>
+            android:drawableLeft="@drawable/setting_16px"
+            android:text=" Số lượng"
+            android:textSize="15sp"
+            android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/text_view_kind_of_ticket"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txvSeatin4"
+ />
 
 
         <TextView
             android:id="@+id/txvRap"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:textStyle="bold"
+            android:layout_marginTop="10dp"
             android:drawableRight="@drawable/setting_16px"
+            android:paddingRight="5dp"
             android:text=" Tên rạp"
             android:textSize="15sp"
-            android:layout_marginTop="10dp"
-            android:layout_alignParentEnd="true"
-            android:paddingRight="5dp" />
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/txvNameUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
-            android:textStyle="bold"
+            android:layout_marginTop="70dp"
             android:drawableRight="@drawable/setting_16px"
+            android:paddingRight="5dp"
             android:text=" Tên người book"
             android:textSize="15sp"
-            android:layout_marginTop="70dp"
-            android:layout_alignParentEnd="true"
-            android:paddingRight="5dp" />
+            android:textStyle="bold" />
+
         <TextView
             android:id="@+id/txvMailUser"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
+            android:layout_marginTop="130dp"
             android:drawableRight="@drawable/setting_16px"
+            android:paddingRight="5dp"
             android:text=" Email"
             android:textSize="15sp"
-            android:textStyle="bold"
-            android:layout_marginTop="130dp"
-            android:layout_alignParentEnd="true"
-            android:paddingRight="5dp" />
+            android:textStyle="bold" />
 
         <Button
             android:id="@+id/btnBookFinal"
@@ -120,10 +117,9 @@
             android:layout_alignParentEnd="true"
             android:layout_alignParentRight="true"
             android:layout_marginTop="320dp"
-            android:text="Xác nhận Book"
-            android:textSize="10sp"
             android:background="@drawable/btn_bg"
-            />
+            android:text="Xác nhận Book"
+            android:textSize="10sp" />
     </RelativeLayout>
 
 

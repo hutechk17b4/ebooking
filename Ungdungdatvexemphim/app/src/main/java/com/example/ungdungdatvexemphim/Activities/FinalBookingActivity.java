@@ -38,11 +38,14 @@ public class FinalBookingActivity extends AppCompatActivity {
 
 
 
-    TextView txvseatin4,txvTenPhim,txvrap,txvNameUser,txvTime,txvmail,txvPrice;
+
+    TextView txvseatin4,txvTenPhim,txvrap,txvNameUser,txvTime,txvmail,txvPrice,txvdate;
+
     Button btnConfirm;
 
     ArrayList<Ticket> arrticket;
     ArrayList<Seat>seatarr;
+
 
 
     String urlpostSeatBook="http://192.168.1.7/php_ebooking/postSeatBook.php";
@@ -50,16 +53,19 @@ public class FinalBookingActivity extends AppCompatActivity {
 //    String urlgetIDKH="http://192.168.1.7/php_ebooking/getIDKachHang.php";
     String urlinsertBooking="http://192.168.1.7/php_ebooking/insertBooking.php";
 
+
     @RequiresApi(api = Build.VERSION_CODES.O)
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_final_booking);
+        setContentView(R.layout.activity_result_ticket);
         AnhXa();
         tenKH=txvNameUser.getText().toString();
 
         getINFORBOOK();
         getUserBooked();
+
         seatarr=new ArrayList<>();
         arrticket=new ArrayList<>();
 
@@ -76,7 +82,11 @@ public class FinalBookingActivity extends AppCompatActivity {
         txvTime=findViewById(R.id.txvTime);
         txvmail=findViewById(R.id.txvMailUser);
         btnConfirm=findViewById(R.id.btnBookFinal);
-        txvPrice=findViewById(R.id.txvprice);
+
+       // txvPrice=findViewById(R.id.txvprice);
+
+        txvdate=findViewById(R.id.txvDate);
+
     }
 
     private void getINFORBOOK()
@@ -84,10 +94,14 @@ public class FinalBookingActivity extends AppCompatActivity {
         final Intent intent=getIntent();
         final Bundle bundle=intent.getBundleExtra("BUNDLE_IDSEAT");
 
+
         final String IDrap=bundle.getString("IDRAP");
         final String Tenphim=bundle.getString("TENPHIM");
 
-        final String IDlichtrinh=bundle.getString("IDlichtrinh");
+
+
+
+        final String IDlichtrinh = bundle.getString("IDlichtrinh");
         getTimeShow(IDlichtrinh);// gọi lại hàm getTime và truyền vào IDlich trình
 
         txvrap.setText(IDrap);
@@ -177,7 +191,7 @@ public class FinalBookingActivity extends AppCompatActivity {
                                 JSONObject object=array.getJSONObject(i);
                                 String StartTime=object.getString("Starttime");
                                 String EndTime=object.getString("Endtime");
-                                txvTime.setText("start:"+StartTime+" - "+"end:"+EndTime);
+                                txvTime.setText("Start:"+StartTime+"  "+"End:  "+EndTime);
 
                             }
                         } catch (JSONException e) {

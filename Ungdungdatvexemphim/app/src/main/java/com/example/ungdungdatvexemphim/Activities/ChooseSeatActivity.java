@@ -36,7 +36,7 @@ public class ChooseSeatActivity extends Activity {
     GridView gvSeat;
 
     Button btnXacNhanChoose;
-    TextView txvTenPhim, txvTenRap;
+    TextView txvTenPhim, txvTenRap ,txtTotalPrice ;
     String IDphim = "";
     String IDrap = "";
     String StartTime="";
@@ -49,9 +49,11 @@ public class ChooseSeatActivity extends Activity {
     ArrayList<Seat> arrSeat;
     SeatAdapter adapter;
 
+
     String urlGetSeatBooked="http://192.168.1.7/php_ebooking/getSeatBooked.php";
     String getUrlGetSeatBooked2="http://192.168.1.7/php_ebooking/getSeatBooked2.php";
     String urlgetTicket="http://192.168.1.7/php_ebooking/getTicket.php";
+
 
     String urlGetTenPhim="http://192.168.1.7/php_ebooking/getTenPhim.php";
 
@@ -70,7 +72,7 @@ public class ChooseSeatActivity extends Activity {
     @Override
     protected void onResume() {
         super.onResume();
-        setContentView(R.layout.activity_choose_seat);
+        setContentView(R.layout.activity_seat_place);
         AnhXa();
         adapter = new SeatAdapter(this, R.layout.dong_seat, arrSeat);
         gvSeat.setAdapter(adapter);
@@ -110,7 +112,10 @@ public class ChooseSeatActivity extends Activity {
         btnXacNhanChoose = (Button) findViewById(R.id.btnXacNhanBook);
         gvSeat = (GridView) findViewById(R.id.grvSeat);
         txvTenPhim = (TextView) findViewById(R.id.txvThongTinPhim);
-        txvTenRap = (TextView) findViewById(R.id.txvTenRap);
+        txvTenRap = (TextView) findViewById(R.id.txttenrap);
+        txtTotalPrice = findViewById(R.id.txtTotalPrice);
+
+
 
         arrSeat = new ArrayList<>();
 
