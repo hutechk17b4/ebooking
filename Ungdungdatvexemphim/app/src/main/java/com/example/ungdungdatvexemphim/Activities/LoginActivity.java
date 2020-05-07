@@ -45,8 +45,8 @@ public class LoginActivity extends AppCompatActivity {
 
     ArrayList<Customer> customersarr;
 
-    String urlLogin = "http://192.168.1.7/php_ebooking/dangnhap.php";// link lấy thông tin đăng nhập
-    String urlgetDataUser="http://192.168.1.7/php_ebooking/getDataKH.php";// link lấy dữ liệu người dùng sau khi đăng nhập
+    String urlLogin = "http://192.168.42.145/PHP_Data/dangnhap.php";// link lấy thông tin đăng nhập
+    String urlgetDataUser="http://192.168.42.145/PHP_Data/getDataKH.php";// link lấy dữ liệu người dùng sau khi đăng nhập
 
 
     private static final Pattern PASSWORD_PATTERN =

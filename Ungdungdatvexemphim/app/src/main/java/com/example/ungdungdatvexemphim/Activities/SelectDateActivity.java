@@ -27,7 +27,7 @@ import java.util.Map;
 
 public class SelectDateActivity extends AppCompatActivity {
 
-    String urlgetDate="http://192.168.1.7/php_ebooking/getDate.php";
+    String urlgetDate="http://192.168.42.145/PHP_Data/getDate.php";
     ListView lvDate;
     ArrayList<Ngay>arrNgay;
     NgayAdapter adapter;

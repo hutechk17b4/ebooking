@@ -31,7 +31,7 @@ import java.util.Map;
 public class HistoryBookActivity extends AppCompatActivity {
 
     String urlgetHistoryBook="http://192.168.1.7/php_ebooking/getHistoryBook.php";
-    String urlgetDetailHistorybook="http://192.168.1.7/php_ebooking/getBookingDetail.php";
+    String urlgetDetailHistorybook="http://192.168.42.145/PHP_Data/getBookingDetail.php";
     ListView lvHistory;
     ArrayList<HistoryBook> arrhistorybook;
     HistoryBookAdapter adapter;

@@ -18,6 +18,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.example.ungdungdatvexemphim.Models.IDtheloai;
 import com.example.ungdungdatvexemphim.Models.Seat;
 import com.example.ungdungdatvexemphim.Models.SessionManagement;
 import com.example.ungdungdatvexemphim.Models.Ticket;
@@ -36,22 +37,25 @@ import java.util.Map;
 public class FinalBookingActivity extends AppCompatActivity {
     String tenKH="";
 
-
-
-
     TextView txvseatin4,txvTenPhim,txvrap,txvNameUser,txvTime,txvmail,txvPrice,txvdate;
 
     Button btnConfirm;
 
     ArrayList<Ticket> arrticket;
     ArrayList<Seat>seatarr;
+    ArrayList<IDtheloai> arridtheloai;
 
 
 
-    String urlpostSeatBook="http://192.168.1.7/php_ebooking/postSeatBook.php";
-    String urlgetTimeShow="http://192.168.1.7/php_ebooking/getTimeShow.php";
+    String urlpostSeatBook="http://192.168.42.145/PHP_Data/postSeatBook.php";
+    String urlgetTimeShow="http://192.168.42.145/PHP_Data/getTimeShow.php";
 //    String urlgetIDKH="http://192.168.1.7/php_ebooking/getIDKachHang.php";
-    String urlinsertBooking="http://192.168.1.7/php_ebooking/insertBooking.php";
+    String urlinsertBooking="http://192.168.42.145/PHP_Data/insertBooking.php";
+    String urlgetIDngay="http://192.168.42.145/PHP_Data/getIDngay.php";
+    String urlgetNgayChieu="http://192.168.42.145/PHP_Data/getNgayChieu.php";
+    String urlgetIDphim="http://192.168.42.145/PHP_Data/getIDphim.php";
+    String urlgetIDtheloai="http://192.168.42.145/PHP_Data/getIDtheloai.php";
+    String urlInsertAI="http://192.168.42.145/PHP_Data/insertDataAI.php";
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -68,6 +72,9 @@ public class FinalBookingActivity extends AppCompatActivity {
 
         seatarr=new ArrayList<>();
         arrticket=new ArrayList<>();
+        arridtheloai=new ArrayList<>();
+
+
 
 
 
@@ -85,7 +92,7 @@ public class FinalBookingActivity extends AppCompatActivity {
 
        // txvPrice=findViewById(R.id.txvprice);
 
-        txvdate=findViewById(R.id.txvDate);
+        txvdate=findViewById(R.id.txtDate);
 
     }
 
@@ -101,11 +108,13 @@ public class FinalBookingActivity extends AppCompatActivity {
 
 
 
+
         final String IDlichtrinh = bundle.getString("IDlichtrinh");
         getTimeShow(IDlichtrinh);// gọi lại hàm getTime và truyền vào IDlich trình
+        getIDngaychieu(IDlichtrinh);
 
         txvrap.setText(IDrap);
-        txvTenPhim.setText(Tenphim);
+       txvTenPhim.setText(Tenphim);
 
 
 
@@ -156,12 +165,15 @@ public class FinalBookingActivity extends AppCompatActivity {
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                getIDphim(Tenphim);
+
                 for (int i=0;i<ID.length;i++)
                 {
                     if (!ID[i].equals("null"))
                     {
                         postdulieubook(seatCot[i],seatHang[i],IDlichtrinh,ID[i],SEATID[i],IDrappost[i]);
                         insertBooking(ID[i],Tenphim,IDlichtrinh);
+
                         Toast.makeText(FinalBookingActivity.this,"Book thành công",Toast.LENGTH_LONG).show();
 
 
@@ -215,6 +227,82 @@ public class FinalBookingActivity extends AppCompatActivity {
         };
         requestQueue.add(stringRequest);
 
+    }
+    //==============================================================================
+    private void getIDngaychieu(final String ID)
+    {
+        RequestQueue requestQueue=Volley.newRequestQueue(this);
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlgetIDngay,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray array=new JSONArray(response);
+                            for (int i=0;i<array.length();i++)
+                            {
+                                JSONObject object=array.getJSONObject(i);
+                                String idngaychieu=object.getString("idngaychieu");
+                                GetNgay(idngaychieu);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params=new HashMap<>();
+                params.put("IDLichTrinhPost",ID);
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+    //====================================================================
+    private void GetNgay(final String idngaychieu)
+    {
+        RequestQueue requestQueue=Volley.newRequestQueue(this);
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlgetNgayChieu,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray array=new JSONArray(response);
+                            for (int i=0;i<array.length();i++)
+                            {
+                                JSONObject object=array.getJSONObject(i);
+                                String date=object.getString("ngaychieu");
+                                txvdate.setText(date);
+                            }
+                        } catch (JSONException e) {
+
+
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params=new HashMap<>();
+                params.put("IDngaychieuPost",idngaychieu);
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
     }
 //==================================================================================
     private void getUserBooked()
@@ -311,9 +399,117 @@ public class FinalBookingActivity extends AppCompatActivity {
     }
     //======================================================================
 
+    private void getIDphim(final String tenphim)
+    {
+        RequestQueue requestQueue=Volley.newRequestQueue(this);
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlgetIDphim,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray array=new JSONArray(response);
+                            for (int i=0;i<array.length();i++)
+                            {
+                                JSONObject object=array.getJSONObject(i);
+                                String IDphim=object.getString("idphim");
+                                getIDtheloai(IDphim);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
 
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
 
+                    }
+                }
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params=new HashMap<>();
+                params.put("TenPhimPost",tenphim);
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
+
+//========================================================================
+    private void getIDtheloai(final String idphim)
+    {
+        RequestQueue requestQueue=Volley.newRequestQueue(this);
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlgetIDtheloai,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray array=new JSONArray(response);
+                         //   Toast.makeText(FinalBookingActivity.this,array+"",Toast.LENGTH_SHORT).show();
+                            for (int i=0;i<array.length();i++)
+                            {
+                                JSONObject object=array.getJSONObject(i);
+                                String idtheloai=object.getString("idtheloai");
+                               // Toast.makeText(FinalBookingActivity.this,arridtheloai.get(i).getIDTheLoai(),Toast.LENGTH_SHORT).show();
+                                insertDataAI(idtheloai);
+                            }
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params=new HashMap<>();
+                params.put("IDPhimPost",idphim);
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
     //======================================================================
+
+    private void insertDataAI(final String IDtheloaipost)
+    {
+        RequestQueue requestQueue=Volley.newRequestQueue(this);
+        StringRequest stringRequest=new StringRequest(Request.Method.POST, urlInsertAI,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+
+                    }
+                }
+        ){
+            @Override
+            protected Map<String, String> getParams() throws AuthFailureError {
+                Map<String,String> params=new HashMap<>();
+                SessionManagement sessionManagement=new SessionManagement(FinalBookingActivity.this);
+                int ID= sessionManagement.getSession();
+                params.put("IDKhachHangPost",ID+"");
+                params.put("IDTheLoaiPost",IDtheloaipost);
+
+
+                return params;
+            }
+        };
+        requestQueue.add(stringRequest);
+    }
 
 
 

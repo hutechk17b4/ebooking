@@ -72,7 +72,7 @@ public class NowPlayingMovieAdapter extends RecyclerView.Adapter<NowPlayingMovie
 
         //=============================Xử Lý Đồng Bộ NodeJS ===================================
         try {
-            mSocket= IO.socket("http://192.168.1.7:3000/");
+            mSocket= IO.socket("http://192.168.42.145:3000/");
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
