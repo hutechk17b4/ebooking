@@ -47,15 +47,15 @@ public class FinalBookingActivity extends AppCompatActivity {
 
 
 
-    String urlpostSeatBook="http://192.168.42.145/PHP_Data/postSeatBook.php";
-    String urlgetTimeShow="http://192.168.42.145/PHP_Data/getTimeShow.php";
+    String urlpostSeatBook="http://192.168.1.53/PHP_Data/postSeatBook.php";
+    String urlgetTimeShow="http://192.168.1.53/PHP_Data/getTimeShow.php";
 //    String urlgetIDKH="http://192.168.1.7/php_ebooking/getIDKachHang.php";
-    String urlinsertBooking="http://192.168.42.145/PHP_Data/insertBooking.php";
-    String urlgetIDngay="http://192.168.42.145/PHP_Data/getIDngay.php";
-    String urlgetNgayChieu="http://192.168.42.145/PHP_Data/getNgayChieu.php";
-    String urlgetIDphim="http://192.168.42.145/PHP_Data/getIDphim.php";
-    String urlgetIDtheloai="http://192.168.42.145/PHP_Data/getIDtheloai.php";
-    String urlInsertAI="http://192.168.42.145/PHP_Data/insertDataAI.php";
+    String urlinsertBooking="http://192.168.1.53/PHP_Data/insertBooking.php";
+    String urlgetIDngay="http://192.168.1.53/PHP_Data/getIDngay.php";
+    String urlgetNgayChieu="http://192.168.1.53/PHP_Data/getNgayChieu.php";
+    String urlgetIDphim="http://192.168.1.53/PHP_Data/getIDphim.php";
+    String urlgetIDtheloai="http://192.168.1.53/PHP_Data/getIDtheloai.php";
+    String urlInsertAI="http://192.168.1.53/PHP_Data/insertDataAI.php";
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -165,7 +165,7 @@ public class FinalBookingActivity extends AppCompatActivity {
         btnConfirm.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getIDphim(Tenphim);
+
 
                 for (int i=0;i<ID.length;i++)
                 {
@@ -175,7 +175,7 @@ public class FinalBookingActivity extends AppCompatActivity {
                         insertBooking(ID[i],Tenphim,IDlichtrinh);
 
                         Toast.makeText(FinalBookingActivity.this,"Book thành công",Toast.LENGTH_LONG).show();
-
+                        getIDphim(Tenphim);
 
                        // break;
                     }
@@ -431,6 +431,7 @@ public class FinalBookingActivity extends AppCompatActivity {
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String,String> params=new HashMap<>();
                 params.put("TenPhimPost",tenphim);
+
                 return params;
             }
         };

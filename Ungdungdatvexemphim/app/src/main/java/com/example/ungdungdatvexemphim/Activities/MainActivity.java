@@ -1,5 +1,7 @@
 package com.example.ungdungdatvexemphim.Activities;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
@@ -71,18 +73,37 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        SessionManagement sessionManagement=new SessionManagement(MainActivity.this);
-        sessionManagement.removeSessionMail();
-        sessionManagement.removeSessionUsername();
-        sessionManagement.removeSession();
-        Intent intent=new Intent(MainActivity.this,LoginActivity.class);
-        startActivity(intent);
 
-        //  int ID=sessionManagement.getSession();
-        int ID=sessionManagement.getSession();
-        String name=sessionManagement.getSessionUsername();
-        String mail=sessionManagement.getSessionMail();
-        Toast.makeText(MainActivity.this,mail+" "+name+""+ID,Toast.LENGTH_LONG).show();
+
+        AlertDialog.Builder alertdialog=new AlertDialog.Builder(this);
+        alertdialog.setTitle("LOGOUT!");
+        alertdialog.setIcon(R.drawable.ic_exit_to_app_black_24dp);
+        alertdialog.setMessage("Are you sure for logout this app ?");
+        alertdialog.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                SessionManagement sessionManagement=new SessionManagement(MainActivity.this);
+                sessionManagement.removeSessionMail();
+                sessionManagement.removeSessionUsername();
+                sessionManagement.removeSession();
+                Intent intent=new Intent(MainActivity.this,LoginActivity.class);
+                startActivity(intent);
+
+                //  int ID=sessionManagement.getSession();
+                int ID=sessionManagement.getSession();
+                String name=sessionManagement.getSessionUsername();
+                String mail=sessionManagement.getSessionMail();
+                Toast.makeText(MainActivity.this,mail+" "+name+""+ID,Toast.LENGTH_LONG).show();
+
+            }
+        });
+        alertdialog.setNegativeButton("No", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+            }
+        });
+        alertdialog.show();
         super.onBackPressed();
     }
 

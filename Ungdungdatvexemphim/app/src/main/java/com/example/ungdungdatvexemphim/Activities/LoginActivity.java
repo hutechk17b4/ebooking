@@ -45,8 +45,8 @@ public class LoginActivity extends AppCompatActivity {
 
     ArrayList<Customer> customersarr;
 
-    String urlLogin = "http://192.168.42.145/PHP_Data/dangnhap.php";// link lấy thông tin đăng nhập
-    String urlgetDataUser="http://192.168.42.145/PHP_Data/getDataKH.php";// link lấy dữ liệu người dùng sau khi đăng nhập
+    String urlLogin = "http://192.168.1.53/PHP_Data/dangnhap.php";// link lấy thông tin đăng nhập
+    String urlgetDataUser="http://192.168.1.53/PHP_Data/getDataKH.php";// link lấy dữ liệu người dùng sau khi đăng nhập
 
 
     private static final Pattern PASSWORD_PATTERN =
@@ -94,7 +94,8 @@ public class LoginActivity extends AppCompatActivity {
 //                String passWord = textInputPassWord.getEditText().getText().toString().trim();
                 if( !validateUserName() |  !validatePassWord()){
 
-                    Toast.makeText(LoginActivity.this, "Hãy nhập đầy đủ thông tin!, test push lên lại chơi, t xóa dòng thông báo vừa mới push", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Hãy nhập đầy đủ thông tin!", Toast.LENGTH_SHORT).show();
+	
 
                 }
                  else{
