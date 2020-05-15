@@ -72,7 +72,7 @@ public class NowPlayingMovieAdapter extends RecyclerView.Adapter<NowPlayingMovie
 
         //=============================Xử Lý Đồng Bộ NodeJS ===================================
         try {
-            mSocket= IO.socket("http://192.168.1.53:3000/");
+            mSocket= IO.socket("http://192.168.42.109:3000/");
         } catch (URISyntaxException e) {
             e.printStackTrace();
         }
@@ -80,6 +80,7 @@ public class NowPlayingMovieAdapter extends RecyclerView.Adapter<NowPlayingMovie
 
         mSocket.emit("client-send-data",playing.getId());
         mSocket.emit("client-send-data-title",playing.getTitle());
+        mSocket.emit("client-send-data-rate",playing.getVote_average());
         String a[]=playing.getGenre_ids();
         for(int i=0;i<a.length;i++)
         {

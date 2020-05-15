@@ -16,6 +16,7 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ungdungdatvexemphim.Models.Customer;
@@ -45,8 +46,9 @@ public class LoginActivity extends AppCompatActivity {
 
     ArrayList<Customer> customersarr;
 
-    String urlLogin = "http://192.168.1.53/PHP_Data/dangnhap.php";// link lấy thông tin đăng nhập
-    String urlgetDataUser="http://192.168.1.53/PHP_Data/getDataKH.php";// link lấy dữ liệu người dùng sau khi đăng nhập
+    String urlLogin = "http://192.168.1.42/PHP_Data/dangnhap.php";// link lấy thông tin đăng nhập
+    String urlgetDataUser="http://192.168.1.42/PHP_Data/getDataKH.php";// link lấy dữ liệu người dùng sau khi đăng nhập
+    String urlgetdataAI="http://192.168.1.42/PHP_Data/getDataAI.php";
 
 
     private static final Pattern PASSWORD_PATTERN =
@@ -83,7 +85,7 @@ public class LoginActivity extends AppCompatActivity {
 
 
         // cho đối tượng xử lý delay 3000mllisecond
-        handler.postDelayed(runnable, 3000);
+        handler.postDelayed(runnable, 2000);
         // Xử lý sự kiện cho nút đăng nhập
 //
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -116,6 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                     {
                         // login và add lại giá trị session
                         LoginCustomer(urlLogin);
+                        getdataAI();
 
                     }
                     else {
@@ -299,6 +302,38 @@ public class LoginActivity extends AppCompatActivity {
 //
 //        Toast.makeText(this, input, Toast.LENGTH_LONG).show();
 //    }
+    //================================================================
+    private void getdataAI()
+    {
+        RequestQueue requestQueue=Volley.newRequestQueue(this);
+        JsonArrayRequest jsonArrayRequest=new JsonArrayRequest(Request.Method.GET, urlgetdataAI, null,
+                new Response.Listener<JSONArray>() {
+                    @Override
+                    public void onResponse(JSONArray response) {
+                        for (int i=0;i<response.length();i++)
+                        {
+                            try {
+                                JSONObject object=response.getJSONObject(i);
+                                String iduser= object.getString("idkhachhang");
+                                String idtheloai= object.getString("idtheloai");
+                                String rate= object.getString("rate");
+                                Toast.makeText(LoginActivity.this,iduser+""+idtheloai+""+rate,Toast.LENGTH_SHORT).show();
+                            } catch (JSONException e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    }
+                },
+                new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(LoginActivity.this,error.toString(),Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+        requestQueue.add(jsonArrayRequest);
+    }
 
 
 }

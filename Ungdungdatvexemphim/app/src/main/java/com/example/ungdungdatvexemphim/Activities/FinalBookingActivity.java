@@ -47,15 +47,15 @@ public class FinalBookingActivity extends AppCompatActivity {
 
 
 
-    String urlpostSeatBook="http://192.168.1.53/PHP_Data/postSeatBook.php";
-    String urlgetTimeShow="http://192.168.1.53/PHP_Data/getTimeShow.php";
+    String urlpostSeatBook="http://192.168.1.42/PHP_Data/postSeatBook.php";
+    String urlgetTimeShow="http://192.168.1.42/PHP_Data/getTimeShow.php";
 //    String urlgetIDKH="http://192.168.1.7/php_ebooking/getIDKachHang.php";
-    String urlinsertBooking="http://192.168.1.53/PHP_Data/insertBooking.php";
-    String urlgetIDngay="http://192.168.1.53/PHP_Data/getIDngay.php";
-    String urlgetNgayChieu="http://192.168.1.53/PHP_Data/getNgayChieu.php";
-    String urlgetIDphim="http://192.168.1.53/PHP_Data/getIDphim.php";
-    String urlgetIDtheloai="http://192.168.1.53/PHP_Data/getIDtheloai.php";
-    String urlInsertAI="http://192.168.1.53/PHP_Data/insertDataAI.php";
+    String urlinsertBooking="http://192.168.1.42/PHP_Data/insertBooking.php";
+    String urlgetIDngay="http://192.168.1.42/PHP_Data/getIDngay.php";
+    String urlgetNgayChieu="http://192.168.1.42/PHP_Data/getNgayChieu.php";
+    String urlgetIDphim="http://192.168.1.42/PHP_Data/getIDphim.php";
+    String urlgetIDtheloai="http://192.168.1.42/PHP_Data/getIDtheloai.php";
+    String urlInsertAI="http://192.168.1.42/PHP_Data/insertDataAI.php";
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -453,8 +453,9 @@ public class FinalBookingActivity extends AppCompatActivity {
                             {
                                 JSONObject object=array.getJSONObject(i);
                                 String idtheloai=object.getString("idtheloai");
+                                String rate=object.getString("rate");
                                // Toast.makeText(FinalBookingActivity.this,arridtheloai.get(i).getIDTheLoai(),Toast.LENGTH_SHORT).show();
-                                insertDataAI(idtheloai);
+                                insertDataAI(idtheloai,rate);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -480,7 +481,7 @@ public class FinalBookingActivity extends AppCompatActivity {
     }
     //======================================================================
 
-    private void insertDataAI(final String IDtheloaipost)
+    private void insertDataAI(final String IDtheloaipost, final String rate)
     {
         RequestQueue requestQueue=Volley.newRequestQueue(this);
         StringRequest stringRequest=new StringRequest(Request.Method.POST, urlInsertAI,
@@ -504,6 +505,7 @@ public class FinalBookingActivity extends AppCompatActivity {
                 int ID= sessionManagement.getSession();
                 params.put("IDKhachHangPost",ID+"");
                 params.put("IDTheLoaiPost",IDtheloaipost);
+                params.put("RatePost",rate);
 
 
                 return params;

@@ -10,6 +10,7 @@
     <color name="black">#000000</color>
     <color name="d_gray">#191919</color>
     <color name="l_gray">#4c4c4c</color>
+
 <!--    Màu cho login đăng nhập và Bottom navigation -->
 
     <color name="transparent">#00000000</color>
@@ -19,6 +20,7 @@
     <color name="gradOrangeStart">#ffe259</color>
     <color name="gradOrangeStop">#ffa751</color>
     <color name="FloralWhite">#FFFAF0</color>
+    <color name="green">#00ff00</color>
 
 
 

@@ -50,15 +50,15 @@ public class ChooseSeatActivity extends Activity {
     SeatAdapter adapter;
 
 
-    String urlGetSeatBooked="http://192.168.42.109/PHP_Data/getSeatBooked.php";
-    String getUrlGetSeatBooked2="http://192.168.42.145/php_ebooking/getSeatBooked2.php";
-    String urlgetTicket="http://192.168.42.145/PHP_Data/getTicket.php";
+    String urlGetSeatBooked="http://192.168.1.42/PHP_Data/getSeatBooked.php";
+    String getUrlGetSeatBooked2="http://192.168.42.109/php_ebooking/getSeatBooked2.php";
+    String urlgetTicket="http://192.168.42.109/PHP_Data/getTicket.php";
 
 
-    String urlGetTenPhim="http://192.168.42.109/PHP_Data/getTenPhim.php";
+    String urlGetTenPhim="http://192.168.1.42/PHP_Data/getTenPhim.php";
 
-    String urlGetSeatR="http://192.168.42.109/PHP_Data/getSeat.php";
-    String urlGetIDphim="http://192.168.42.109/PHP_Data/getMovieName.php";
+    String urlGetSeatR="http://192.168.1.42/PHP_Data/getSeat.php";
+    String urlGetIDphim="http://192.168.1.42/PHP_Data/getMovieName.php";
 
 
 
