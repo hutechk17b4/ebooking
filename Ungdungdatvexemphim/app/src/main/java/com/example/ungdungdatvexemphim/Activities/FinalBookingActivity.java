@@ -47,15 +47,15 @@ public class FinalBookingActivity extends AppCompatActivity {
 
 
 
-    String urlpostSeatBook="http://192.168.1.42/PHP_Data/postSeatBook.php";
-    String urlgetTimeShow="http://192.168.1.42/PHP_Data/getTimeShow.php";
+    String urlpostSeatBook="http://10.20.78.183/PHP_Data/postSeatBook.php";
+    String urlgetTimeShow="http://10.20.78.183/PHP_Data/getTimeShow.php";
 //    String urlgetIDKH="http://192.168.1.7/php_ebooking/getIDKachHang.php";
-    String urlinsertBooking="http://192.168.1.42/PHP_Data/insertBooking.php";
-    String urlgetIDngay="http://192.168.1.42/PHP_Data/getIDngay.php";
-    String urlgetNgayChieu="http://192.168.1.42/PHP_Data/getNgayChieu.php";
-    String urlgetIDphim="http://192.168.1.42/PHP_Data/getIDphim.php";
-    String urlgetIDtheloai="http://192.168.1.42/PHP_Data/getIDtheloai.php";
-    String urlInsertAI="http://192.168.1.42/PHP_Data/insertDataAI.php";
+    String urlinsertBooking="http://10.20.78.183/PHP_Data/insertBooking.php";
+    String urlgetIDngay="http://10.20.78.183/PHP_Data/getIDngay.php";
+    String urlgetNgayChieu="http://10.20.78.183/PHP_Data/getNgayChieu.php";
+    String urlgetIDphim="http://10.20.78.183/PHP_Data/getIDphim.php";
+    String urlgetIDtheloai="http://10.20.78.183/PHP_Data/getIDtheloai.php";
+    String urlInsertAI="http://10.20.78.183/PHP_Data/insertDataAI.php";
 
 
     @RequiresApi(api = Build.VERSION_CODES.O)

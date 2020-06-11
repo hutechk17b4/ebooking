@@ -33,8 +33,8 @@ public class RegisterActivity extends AppCompatActivity {
     private TextInputLayout textInputEmail;
     private Button btnRegister;
 
-    String urlCheckUser="http://192.168.1.42/PHP_Data/checkUsername.php";
-    String urlInsert = "http://192.168.1.42/PHP_Data/insertUser.php";
+    String urlCheckUser="http://10.20.78.183/PHP_Data/checkUsername.php";
+    String urlInsert = "http://10.20.78.183/PHP_Data/insertUser.php";
 
     private static final Pattern PASSWORD_PATTERN =
             Pattern.compile("^" +

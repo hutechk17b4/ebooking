@@ -1,7 +1,10 @@
 package com.example.ungdungdatvexemphim.Activities;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Environment;
+import android.os.FileUtils;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
@@ -20,6 +23,7 @@ import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.ungdungdatvexemphim.Models.Customer;
+import com.example.ungdungdatvexemphim.Models.DataAI;
 import com.example.ungdungdatvexemphim.Models.SessionManagement;
 import com.example.ungdungdatvexemphim.R;
 import com.google.android.material.textfield.TextInputLayout;
@@ -28,10 +32,24 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
+
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 // MÀN HÌNH ĐĂNG NHẬP
 public class LoginActivity extends AppCompatActivity {
@@ -43,12 +61,14 @@ public class LoginActivity extends AppCompatActivity {
     private TextInputLayout textInputUserName;
     private TextInputLayout textInputPassWord;
 
+    private static final String file_name="testai.txt";
 
     ArrayList<Customer> customersarr;
+    ArrayList<DataAI> data_ai_arr;
 
-    String urlLogin = "http://192.168.1.42/PHP_Data/dangnhap.php";// link lấy thông tin đăng nhập
-    String urlgetDataUser="http://192.168.1.42/PHP_Data/getDataKH.php";// link lấy dữ liệu người dùng sau khi đăng nhập
-    String urlgetdataAI="http://192.168.1.42/PHP_Data/getDataAI.php";
+    String urlLogin = "http://10.20.78.183/PHP_Data/dangnhap.php";// link lấy thông tin đăng nhập
+    String urlgetDataUser="http://10.20.78.183/PHP_Data/getDataKH.php";// link lấy dữ liệu người dùng sau khi đăng nhập
+    String urlgetdataAI="http://10.20.78.183/PHP_Data/getDataAI.php";
 
 
     private static final Pattern PASSWORD_PATTERN =
@@ -82,6 +102,7 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
         addControls();
         customersarr =new ArrayList<>();
+        data_ai_arr=new ArrayList<>();
 
 
         // cho đối tượng xử lý delay 3000mllisecond
@@ -119,6 +140,7 @@ public class LoginActivity extends AppCompatActivity {
                         // login và add lại giá trị session
                         LoginCustomer(urlLogin);
                         getdataAI();
+
 
                     }
                     else {
@@ -306,34 +328,73 @@ public class LoginActivity extends AppCompatActivity {
     private void getdataAI()
     {
         RequestQueue requestQueue=Volley.newRequestQueue(this);
-        JsonArrayRequest jsonArrayRequest=new JsonArrayRequest(Request.Method.GET, urlgetdataAI, null,
-                new Response.Listener<JSONArray>() {
+        StringRequest stringRequest=new StringRequest(Request.Method.GET, urlgetdataAI,
+                new Response.Listener<String>() {
                     @Override
-                    public void onResponse(JSONArray response) {
-                        for (int i=0;i<response.length();i++)
-                        {
-                            try {
-                                JSONObject object=response.getJSONObject(i);
-                                String iduser= object.getString("idkhachhang");
-                                String idtheloai= object.getString("idtheloai");
-                                String rate= object.getString("rate");
-                                Toast.makeText(LoginActivity.this,iduser+""+idtheloai+""+rate,Toast.LENGTH_SHORT).show();
-                            } catch (JSONException e) {
-                                e.printStackTrace();
+                    public void onResponse(String response) {
+                        try {
+                            JSONArray array=new JSONArray(response);
+                            for (int i=0;i<array.length();i++)
+                            {
+
+                                JSONObject object=array.getJSONObject(i);
+
+                                     String idKH= object.getString("idkhachhang");
+                                       String idTL= object.getString("idtheloai");
+                                       String Rate= object.getString("rate");
+                                       Toast.makeText(LoginActivity.this,idKH+"::"+idTL+"::"+Rate,Toast.LENGTH_SHORT).show();
+                                       ghiFileAI(idKH,idTL,Rate);
+
+
+
+
                             }
 
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
                         }
+
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(LoginActivity.this,error.toString(),Toast.LENGTH_SHORT).show();
+
                     }
                 }
         );
-        requestQueue.add(jsonArrayRequest);
+        requestQueue.add(stringRequest);
+
+
     }
+    //=================================================================
+    private void ghiFileAI(String iduser, String idtheloai, String rate) {
+        // Get the directory for the user's public pictures directory.
+        String aaa="::";
+        String bbb="\n";
+        FileOutputStream fos;
+        try {
+            fos = openFileOutput(file_name,MODE_APPEND);
+            fos.write(iduser.getBytes());
+            fos.write(aaa.getBytes());
+            fos.write(idtheloai.getBytes());
+            fos.write(aaa.getBytes());
+            fos.write(rate.getBytes());
+            fos.write(bbb.getBytes());
+
+
+            //  fos.close();
+           // Toast.makeText(LoginActivity.this,"save to"+getFilesDir()+"/"+file_name,Toast.LENGTH_SHORT).show();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
 
 
 }

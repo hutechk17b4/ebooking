@@ -26,7 +26,7 @@ import java.util.Map;
 public class DetailBookActivity extends AppCompatActivity {
     TextView txvIDbooking,tenkhachhang,time,idseatno,tenphim,timestart;
 
-    String urlgetDetailBook="http://192.168.1.42/PHP_Data/getHistoryBookDetail.php";
+    String urlgetDetailBook="http://10.20.78.183/PHP_Data/getHistoryBookDetail.php";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
